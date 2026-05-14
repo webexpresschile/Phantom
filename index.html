@@ -3,613 +3,340 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PHANTOM — Marketing Digital de Alto Impacto</title>
-  <meta name="description" content="Phantom Web. Presencia digital profesional para negocios que quieren resultados reales." />
+  <title>PHANTOM — ALTO IMPACTO</title>
+  <meta name="description" content="Phantom. Presencia digital para negocios que quieren dejar de perder clientes." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/4.0.0-beta.3/anime.min.js" integrity="sha512-/70bP4cJjHziY5fhyivPhwhWS0Md5tLn1sQmGpP2gBxvWzDgNJPX5KVPQqQ8QxgMwjH7bHvxTF76DfDPTSn+gQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    :root {
-      --bg: #0a0a0a;
-      --accent: #ff0030;
-      --green: #00ff41;
-      --purple: #6c00ff;
-      --orange: #ff6a00;
-      --text: #ffffff;
-      --text-dim: #666;
-      --border: #1a1a1a;
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --bg:#0a0a0a;--red:#e0002b;--green:#00ff41;--purple:#5c00d4;
+      --text:#eee;--dim:#444;--line:#1c1c1c;
     }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Inter', system-ui, sans-serif;
-      overflow-x: hidden;
-      min-height: 100vh;
+    html{scroll-behavior:smooth}
+    body{
+      background:var(--bg);color:var(--text);
+      font-family:'Inter',system-ui,sans-serif;
+      overflow-x:hidden;min-height:100vh;
+      background-image:
+        repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,255,255,0.008) 2px,rgba(255,255,255,0.008) 4px);
     }
 
-    /* === CANVAS PARTICLE BG === */
-    #particle-canvas {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    /* === PLASMA GHOST GRADIENT === */
-    #plasma {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      z-index: 0;
-      pointer-events: none;
+    /* canvas particles */
+    #px{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;pointer-events:none}
+    /* plasma */
+    #plasma{
+      position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;pointer-events:none;
       background:
-        radial-gradient(ellipse 60% 50% at 20% 30%, rgba(108,0,255,0.12) 0%, transparent 70%),
-        radial-gradient(ellipse 50% 60% at 80% 70%, rgba(255,0,48,0.10) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 40% at 50% 50%, rgba(0,255,65,0.06) 0%, transparent 70%);
-      animation: plasmaMove 12s ease-in-out infinite alternate;
+        radial-gradient(ellipse 50% 40% at 25% 30%,rgba(92,0,212,0.15),transparent 70%),
+        radial-gradient(ellipse 40% 50% at 75% 70%,rgba(224,0,43,0.12),transparent 70%);
+      animation:drif 14s ease-in-out infinite alternate;
     }
-    @keyframes plasmaMove {
-      0% { transform: scale(1) translate(0,0); }
-      33% { transform: scale(1.1) translate(2%,-2%); }
-      66% { transform: scale(0.95) translate(-3%,3%); }
-      100% { transform: scale(1.05) translate(1%,-1%); }
+    @keyframes drif{
+      0%{transform:scale(1)translate(0,0)}
+      50%{transform:scale(1.08)translate(-1%,2%)}
+      100%{transform:scale(0.95)translate(2%,-1%)}
     }
 
-    /* === CONTENT OVERLAY === */
-    .content {
-      position: relative;
-      z-index: 1;
-    }
+    .z1{position:relative;z-index:1}
 
-    /* === NAV === */
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 24px 40px;
-      max-width: 1200px;
-      margin: 0 auto;
-      border-bottom: 2px solid var(--border);
+    /* ── NAV ── */
+    nav{
+      display:flex;justify-content:space-between;align-items:center;
+      padding:20px 32px;max-width:1200px;margin:0 auto;
     }
-    .logo {
-      font-size: 20px;
-      font-weight: 900;
-      letter-spacing: 6px;
-      text-transform: uppercase;
+    .logo-m{
+      font-size:24px;font-weight:900;letter-spacing:4px;text-transform:uppercase;
+      display:flex;align-items:center;gap:10px;
     }
-    .logo span { color: var(--accent); }
-    nav .cta-small {
-      background: var(--accent);
-      color: #000;
-      border: none;
-      padding: 12px 24px;
-      font-family: 'Inter', sans-serif;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: 0.2s;
+    .logo-m .mark{
+      display:inline-block;width:28px;height:28px;
+      background:var(--red);color:#000;font-size:14px;text-align:center;line-height:28px;
     }
-    nav .cta-small:hover { background: #fff; color: #000; }
+    .logo-m span{color:var(--red)}
+    .nav-cta{
+      background:var(--red);color:#000;border:none;
+      padding:10px 20px;font:800 11px/1 'Inter',sans-serif;
+      letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:.15s;
+    }
+    .nav-cta:hover{background:#fff}
 
-    /* === HERO === */
-    .hero {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 60px 40px 80px;
-      position: relative;
+    /* ── HERO ── */
+    .hero{
+      max-width:1200px;margin:0 auto;padding:50px 32px 80px;position:relative;
+      border-left:3px solid var(--line);border-right:3px solid var(--line);
     }
-    .hero-eyebrow {
-      font-size: 13px;
-      font-weight: 800;
-      letter-spacing: 6px;
-      text-transform: uppercase;
-      color: var(--green);
-      margin-bottom: 20px;
+    .hero::before{
+      content:'P';position:absolute;top:-40px;right:20px;
+      font-size:clamp(200px,30vw,500px);font-weight:900;color:transparent;
+      -webkit-text-stroke:3px rgba(224,0,43,0.06);
+      line-height:1;pointer-events:none;user-select:none;
     }
-    .hero-title {
-      font-size: clamp(72px, 12vw, 160px);
-      font-weight: 900;
-      line-height: 0.88;
-      letter-spacing: -4px;
-      text-transform: uppercase;
-      margin-bottom: 10px;
+    .hero-eyebrow{
+      font-size:11px;font-weight:800;letter-spacing:5px;text-transform:uppercase;
+      color:var(--dim);margin-bottom:16px;
     }
-    .hero-title .accent { color: var(--accent); }
-    .hero-title .ghost { color: transparent; -webkit-text-stroke: 2px rgba(255,255,255,0.15); }
-    .hero-sub {
-      font-size: 18px;
-      font-weight: 400;
-      color: var(--text-dim);
-      max-width: 500px;
-      margin-top: 24px;
-      line-height: 1.6;
+    .hero-eyebrow::before{content:'/// ';color:var(--red)}
+    .hero h1{
+      font-size:clamp(64px,11vw,140px);font-weight:900;
+      line-height:.85;letter-spacing:-3px;text-transform:uppercase;
     }
-    .hero-services {
-      display: flex;
-      gap: 16px;
-      margin-top: 40px;
-      flex-wrap: wrap;
+    .hero h1 .s1{color:var(--text)}
+    .hero h1 .s2{color:transparent;-webkit-text-stroke:3px var(--red);position:relative}
+    .hero h1 .s3{color:var(--red)}
+    .hero p{
+      font-size:16px;font-weight:400;color:#777;max-width:480px;
+      margin-top:24px;line-height:1.6;
     }
-    .hero-services span {
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      padding: 8px 14px;
-      border: 2px solid var(--border);
-      color: var(--text-dim);
-      transition: 0.2s;
+    .hero-tags{
+      display:flex;gap:10px;margin-top:36px;flex-wrap:wrap;
     }
-    .hero-services span:hover {
-      border-color: var(--accent);
-      color: var(--accent);
+    .hero-tags span{
+      font:800 10px/1 'Inter',sans-serif;letter-spacing:2px;text-transform:uppercase;
+      padding:6px 12px;border:2px solid var(--line);color:var(--dim);
     }
+    .hero-tags span:nth-child(2){border-color:var(--red);color:var(--red)}
 
-    /* === CTA BAND === */
-    .cta-band {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 60px 40px 80px;
-      text-align: center;
-      border-top: 2px solid var(--border);
+    /* ── SERVICES ── */
+    .sv{max-width:1200px;margin:0 auto;padding:80px 32px}
+    .sv-h{
+      font-size:clamp(28px,4vw,48px);font-weight:900;text-transform:uppercase;
+      letter-spacing:-1px;margin-bottom:40px;
+      display:flex;align-items:center;gap:16px;
     }
-    .cta-band h2 {
-      font-size: clamp(28px, 5vw, 56px);
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: -1px;
-      margin-bottom: 16px;
+    .sv-h::after{content:'';flex:1;height:3px;background:var(--line)}
+    .sv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+    .sv-card{
+      border:3px solid var(--line);
+      padding:40px 28px;position:relative;
+      transition:.2s;background:var(--bg);
     }
-    .cta-band p {
-      font-size: 16px;
-      color: var(--text-dim);
-      margin-bottom: 40px;
+    .sv-card:hover{border-color:var(--red)}
+    .sv-card .n{
+      font-size:56px;font-weight:900;
+      color:transparent;-webkit-text-stroke:2px rgba(224,0,43,.15);
+      position:absolute;top:12px;right:16px;line-height:1;
     }
-    .cta-giant {
-      display: inline-block;
-      background: var(--accent);
-      color: #000;
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(18px, 3vw, 32px);
-      font-weight: 900;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      text-decoration: none;
-      padding: 24px 60px;
-      border: none;
-      cursor: pointer;
-      transition: 0.2s;
-      position: relative;
+    .sv-card h3{font-size:18px;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+    .sv-card p{font-size:13px;color:#555;line-height:1.7;margin-bottom:20px;max-width:90%}
+    .sv-card .tag{
+      display:inline-block;
+      font:800 10px/1 'Inter',sans-serif;letter-spacing:2px;text-transform:uppercase;
+      color:var(--red);border:2px solid var(--red);padding:5px 10px;
     }
-    .cta-giant:hover {
-      background: #fff;
-      transform: scale(1.02);
-    }
-    .cta-giant::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border: 2px solid var(--accent);
-      transform: translate(6px, 6px);
-      transition: 0.2s;
-      pointer-events: none;
-    }
-    .cta-giant:hover::after {
-      transform: translate(10px, 10px);
-      border-color: #fff;
-    }
+    .sv-card .price{font-size:28px;font-weight:900;margin-top:8px}
 
-    /* === SERVICES === */
-    .services-section {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 80px 40px;
+    /* ── WHY ── */
+    .why{max-width:1200px;margin:0 auto;padding:60px 32px 80px}
+    .why h2{
+      font-size:clamp(24px,3vw,36px);font-weight:900;text-transform:uppercase;
+      letter-spacing:-1px;margin-bottom:36px;
     }
-    .services-section h2 {
-      font-size: clamp(32px, 4vw, 56px);
-      font-weight: 900;
-      letter-spacing: -1px;
-      text-transform: uppercase;
-      margin-bottom: 40px;
+    .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+    .why-item{
+      border:3px solid var(--line);padding:32px 24px;
+      text-align:center;position:relative;
     }
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+    .why-item .br{
+      display:inline-block;
+      font-size:10px;font-weight:800;letter-spacing:2px;
+      color:var(--dim);border:2px solid var(--line);padding:4px 8px;
+      margin-bottom:12px;
     }
-    .service-card {
-      border: 2px solid var(--border);
-      padding: 40px 32px;
-      transition: 0.3s;
-      position: relative;
-    }
-    .service-card:hover {
-      border-color: var(--accent);
-      transform: translateY(-4px);
-    }
-    .service-card .num {
-      font-size: 48px;
-      font-weight: 900;
-      color: transparent;
-      -webkit-text-stroke: 2px rgba(255,0,48,0.2);
-      margin-bottom: 16px;
-    }
-    .service-card h3 {
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-    .service-card p {
-      font-size: 14px;
-      color: var(--text-dim);
-      line-height: 1.7;
-      margin-bottom: 20px;
-    }
-    .service-card .from {
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--accent);
-    }
-    .service-card .price {
-      font-size: 32px;
-      font-weight: 900;
-      margin-top: 4px;
-    }
+    .why-item h4{font-size:16px;font-weight:800;text-transform:uppercase;margin-bottom:8px}
+    .why-item p{font-size:13px;color:#555;line-height:1.6}
+    .why-item:hover .br{color:var(--text);border-color:var(--red)}
 
-    /* === WHY === */
-    .why-section {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 60px 40px 80px;
-      border-top: 2px solid var(--border);
+    /* ── CTA ── */
+    .cta-sec{
+      max-width:1200px;margin:0 auto;padding:60px 32px 80px;text-align:center;
+      border-top:3px solid var(--line);position:relative;
     }
-    .why-section h2 {
-      font-size: clamp(24px, 3vw, 40px);
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: -1px;
-      margin-bottom: 40px;
+    .cta-sec h2{
+      font-size:clamp(32px,5vw,64px);font-weight:900;text-transform:uppercase;
+      letter-spacing:-2px;margin-bottom:10px;
     }
-    .why-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+    .cta-sec h2 i{color:var(--red);font-style:normal}
+    .cta-sec p{font-size:14px;color:#555;margin-bottom:36px}
+    .btn-giant{
+      display:inline-block;background:var(--red);color:#000;
+      font:900 clamp(16px,3vw,28px)/1 'Inter',sans-serif;
+      letter-spacing:4px;text-transform:uppercase;text-decoration:none;
+      padding:20px 48px;border:none;cursor:pointer;position:relative;transition:.15s;
     }
-    .why-item {
-      padding: 24px;
-      border: 2px solid var(--border);
-      text-align: center;
+    .btn-giant:hover{background:#fff;transform:scale(1.03)}
+    .btn-giant::after{
+      content:'';position:absolute;inset:0;
+      border:3px solid var(--red);transform:translate(5px,5px);
+      transition:.15s;pointer-events:none;
     }
-    .why-item .icon {
-      font-size: 36px;
-      margin-bottom: 12px;
-    }
-    .why-item h4 {
-      font-size: 14px;
-      font-weight: 800;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-    .why-item p {
-      font-size: 13px;
-      color: var(--text-dim);
-      line-height: 1.6;
-    }
+    .btn-giant:hover::after{transform:translate(8px,8px);border-color:#fff}
 
-    /* === PHANTOM TAGLINE === */
-    .phantom-tagline {
-      text-align: center;
-      padding: 40px;
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 8px;
-      text-transform: uppercase;
-      color: var(--text-dim);
-      border-top: 2px solid var(--border);
+    /* ── FOOTER ── */
+    .f{max-width:1200px;margin:0 auto;text-align:center;padding:24px 32px;border-top:3px solid var(--line)}
+    .f p{
+      font:800 9px/1 'Inter',sans-serif;letter-spacing:6px;
+      text-transform:uppercase;color:var(--dim);
     }
-    .phantom-tagline span { color: var(--accent); }
+    .f p span{color:var(--red)}
 
-    /* === RESPONSIVE === */
-    @media (max-width: 768px) {
-      nav { padding: 16px 20px; }
-      .hero { padding: 40px 20px 60px; }
-      .cta-band { padding: 40px 20px; }
-      .services-section { padding: 60px 20px; }
-      .services-grid { grid-template-columns: 1fr; }
-      .why-grid { grid-template-columns: 1fr; }
-      .why-section { padding: 40px 20px; }
-      .logo { font-size: 16px; letter-spacing: 4px; }
+    /* ── MOBILE ── */
+    @media(max-width:768px){
+      nav{padding:16px}
+      .hero{padding:36px 16px 60px;border-left:none;border-right:none}
+      .sv-grid{grid-template-columns:1fr}
+      .why-grid{grid-template-columns:1fr}
+      .sv,.why,.cta-sec{padding:40px 16px}
     }
-    @media (min-width: 769px) and (max-width: 1024px) {
-      .services-grid { grid-template-columns: repeat(2, 1fr); }
-      .why-grid { grid-template-columns: repeat(2, 1fr); }
+    @media(min-width:769px)and(max-width:1024px){
+      .sv-grid,.why-grid{grid-template-columns:repeat(2,1fr)}
     }
   </style>
 </head>
 <body>
-  <canvas id="particle-canvas"></canvas>
+  <canvas id="px"></canvas>
   <div id="plasma"></div>
 
-  <div class="content">
-    <!-- NAV -->
+  <div class="z1">
     <nav>
-      <div class="logo">PHANTOM<span>.</span></div>
-      <button class="cta-small" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Agendar llamada</button>
+      <div class="logo-m"><span class="mark">P</span> PHANTOM<span>.</span></div>
+      <button class="nav-cta" onclick="document.getElementById('cta-main').scrollIntoView({behavior:'smooth'})">Agendar</button>
     </nav>
 
-    <!-- HERO -->
-    <section class="hero" id="hero-text">
-      <div class="hero-eyebrow" id="eyebrow">╳ Marketing Digital de Alto Impacto</div>
-      <h1 class="hero-title" id="title-main">
-        <span class="ghost">PHAN</span><br />
-        <span class="accent">TOM</span><br />
-        <span>WEB</span>
+    <section class="hero" id="hero-e">
+      <div class="hero-eyebrow" id="eyeb">Marketing de alto impacto</div>
+      <h1>
+        <span class="s1" id="h1a">NEGOCIOS</span><br>
+        <span class="s2" id="h1b">FANTASMA</span><br>
+        <span class="s3" id="h1c">NO EXISTEN</span>
       </h1>
-      <p class="hero-sub" id="hero-sub-text">Transformamos tu negocio en una máquina de clientes. Sitio web, chatbot con IA y tienda online — todo en uno.</p>
-      <div class="hero-services" id="service-tags">
-        <span>Diseño Web</span>
-        <span>Chatbot IA</span>
-        <span>Tienda Online</span>
+      <p id="hero-p">Tu negocio puede tener la mejor calidad del mundo, pero si nadie te encuentra en Google, no existes. Sitio web, chatbot con IA y tienda online. Todo lo que necesitas para que te encuentren.</p>
+      <div class="hero-tags" id="tags">
+        <span>DISENO WEB</span>
+        <span>CHATBOT IA</span>
+        <span>TIENDA ONLINE</span>
         <span>SEO</span>
-        <span>Analytics</span>
       </div>
     </section>
 
-    <!-- SERVICES -->
-    <section class="services-section" id="services">
-      <h2>Servicios</h2>
-      <div class="services-grid">
-        <div class="service-card card-anim">
-          <div class="num">01</div>
-          <h3>Diseño Web</h3>
-          <p>Sitios profesionales, rápidos y optimizados para convertir visitantes en clientes. Con WhatsApp, Google Maps y galería de trabajos.</p>
-          <div class="from">Desde</div>
+    <section class="sv" id="sv-sec">
+      <div class="sv-h">SERVICIOS</div>
+      <div class="sv-grid">
+        <div class="sv-card ca">
+          <div class="n">01</div>
+          <h3>DISENO WEB</h3>
+          <p>Paginas rapidas, limpias y optimizadas. Conectamos WhatsApp, Google Maps y galeria de trabajos. Tu negocio abierto 24/7.</p>
+          <span class="tag">DESDE</span>
           <div class="price">$49 USD</div>
         </div>
-        <div class="service-card card-anim">
-          <div class="num">02</div>
-          <h3>Chatbot IA</h3>
-          <p>Automatiza tu WhatsApp 24/7. Responde preguntas, agenda citas y capta leads mientras duermes. Como tener una recepcionista que nunca para.</p>
-          <div class="from">Desde</div>
-          <div class="price">$49/mes</div>
+        <div class="sv-card ca">
+          <div class="n">02</div>
+          <h3>CHATBOT IA</h3>
+          <p>Automatiza tu WhatsApp. Responde preguntas, agenda citas y capta leads automaticamente. Como tener una recepcionista que nunca duerme.</p>
+          <span class="tag">DESDE</span>
+          <div class="price">$49 /MES</div>
         </div>
-        <div class="service-card card-anim">
-          <div class="num">03</div>
-          <h3>Tienda Online</h3>
-          <p>Montamos tu tienda lista para vender. Catálogo, carrito, pagos y envíos integrados. Tu negocio abierto 24/7 sin que muevas un dedo.</p>
-          <div class="from">Desde</div>
+        <div class="sv-card ca">
+          <div class="n">03</div>
+          <h3>TIENDA ONLINE</h3>
+          <p>Tienda lista para vender. Catalogo, carrito, pagos integrados. Te encargas del producto, nosotros de la tecnologia.</p>
+          <span class="tag">DESDE</span>
           <div class="price">$99 USD</div>
         </div>
       </div>
     </section>
 
-    <!-- WHY -->
-    <section class="why-section" id="why">
-      <h2>Por qué Phantom</h2>
+    <section class="why" id="wy-sec">
+      <h2>POR QUE PHANTOM</h2>
       <div class="why-grid">
-        <div class="why-item card-anim">
-          <div class="icon">⚡</div>
-          <h4>Velocidad</h4>
-          <p>Tu sitio listo en días, no meses. Sin vueltas ni burocracia.</p>
+        <div class="why-item ca">
+          <div class="br">01</div>
+          <h4>VELOCIDAD</h4>
+          <p>Tu sitio en 72 horas. Sin bufetes, sin consultorias eternas. Hablamos, definimos y ejecutamos.</p>
         </div>
-        <div class="why-item card-anim">
-          <div class="icon">🎯</div>
-          <h4>Resultados</h4>
-          <p>Cada proyecto se mide en clientes nuevos, no en likes.</p>
+        <div class="why-item ca">
+          <div class="br">02</div>
+          <h4>SIN CUENTOS</h4>
+          <p>No medimos exito en likes ni seguidores. Medimos en clientes nuevos que llegan a tu negocio.</p>
         </div>
-        <div class="why-item card-anim">
-          <div class="icon">🔧</div>
-          <h4>Soporte Real</h4>
-          <p>Te respondemos por WhatsApp. Sin tickets, sin bots, sin esperas.</p>
+        <div class="why-item ca">
+          <div class="br">03</div>
+          <h4>SOPORTE REAL</h4>
+          <p>WhatsApp directo. Sin tickets, sin bots, sin formularios. Respondemos nosotros, en persona.</p>
         </div>
       </div>
     </section>
 
-    <!-- CTA -->
-    <section class="cta-band" id="cta">
-      <h2>¿Listo para <span style="color:var(--accent)">facturar</span> más?</h2>
-      <p>Agenda una llamada de 15 minutos sin compromiso y te mostramos cómo empezar.</p>
-      <a class="cta-giant" href="#" onclick="alert('📞 Agenda tu llamada: +56 9 XXXX XXXX\nO escríbenos a phantom@email.com'); return false;">
-        Agendar llamada
-      </a>
+    <section class="cta-sec" id="cta-main">
+      <h2>¿TU NEGOCIO ES <i>FANTASMA</i>?</h2>
+      <p>15 minutos. Sin compromiso. Te mostramos como aparecer en Google y dejar de perder clientes.</p>
+      <button class="btn-giant" onclick="alert('AGENDA AQUI:\n\nWhatsApp: +56 9 XXXX XXXX\nEmail: hola@phantom.cl')">AGENDAR LLAMADA</button>
     </section>
 
-    <div class="phantom-tagline">
-      Phantom<span>.</span> — El lado oscuro del marketing digital
-    </div>
+    <footer class="f">
+      <p>PHANTOM<span>.</span> — EL LADO OSCURO DEL MARKETING DIGITAL</p>
+    </footer>
   </div>
 
   <script>
-    // ============================================
-    // PARTICLE CANVAS — Falling skulls & orbs
-    // ============================================
-    const canvas = document.getElementById('particle-canvas');
-    const ctx = canvas.getContext('2d');
-    let W, H, particles = [];
-
-    function resize() {
-      W = canvas.width = window.innerWidth;
-      H = canvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resize);
-    resize();
-
-    const PARTICLE_COUNT = 80;
-    const SYMBOLS = ['💀', '☠️', '👻', '·', '✧', '○', '◇'];
-
-    class Particle {
-      constructor() {
-        this.reset();
+    // ── PARTICLES ──
+    const c=document.getElementById('px'),cx=c.getContext('2d');
+    let W,H,p=[];
+    function rs(){W=c.width=innerWidth;H=c.height=innerHeight}
+    addEventListener('resize',rs);rs();
+    const syms=['·','✦','◇'];
+    const N=25;
+    class Pt{
+      constructor(){
+        this.x=Math.random()*W;this.y=Math.random()*H;
+        this.sz=3+Math.random()*6;this.sp=.15+Math.random()*.3;
+        this.wb=Math.random()*6.28;this.ws=.005+Math.random()*.015;
+        this.sy=syms[Math.floor(Math.random()*syms.length)];
+        this.al=.02+Math.random()*.06;
       }
-      reset() {
-        this.x = Math.random() * W;
-        this.y = -20;
-        this.size = 8 + Math.random() * 20;
-        this.speed = 0.3 + Math.random() * 0.8;
-        this.wobble = Math.random() * Math.PI * 2;
-        this.wobbleSpeed = 0.01 + Math.random() * 0.02;
-        this.wobbleAmp = 20 + Math.random() * 40;
-        this.symbol = SYMBOLS[Math.floor(Math.random() * SYMBOLS.length)];
-        this.alpha = 0.2 + Math.random() * 0.3;
-        this.rotation = Math.random() * Math.PI * 2;
-        this.rotationSpeed = (Math.random() - 0.5) * 0.02;
+      upd(){
+        this.y+=this.sp;this.wb+=this.ws;this.x+=Math.sin(this.wb)*.3;
+        if(this.y>H+20){this.y=-10;this.x=Math.random()*W}
       }
-      update() {
-        this.y += this.speed;
-        this.wobble += this.wobbleSpeed;
-        this.x += Math.sin(this.wobble) * 0.5;
-        this.rotation += this.rotationSpeed;
-        if (this.y > H + 40) this.reset();
-        if (this.x < -40 || this.x > W + 40) this.reset();
-      }
-      draw() {
-        ctx.save();
-        ctx.globalAlpha = this.alpha;
-        ctx.translate(this.x, this.y);
-        ctx.rotate(this.rotation);
-        ctx.font = `${this.size}px sans-serif`;
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText(this.symbol, 0, 0);
-        ctx.restore();
+      dr(){
+        cx.save();cx.globalAlpha=this.al;
+        cx.translate(this.x,this.y);
+        cx.font=this.sz+'px sans-serif';cx.textAlign='center';cx.textBaseline='middle';
+        cx.fillText(this.sy,0,0);cx.restore();
       }
     }
+    for(let i=0;i<N;i++)p.push(new Pt());
+    function lp(){cx.clearRect(0,0,W,H);p.forEach(e=>{e.upd();e.dr()});requestAnimationFrame(lp)}
+    lp();
 
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-      const p = new Particle();
-      p.y = Math.random() * H; // spread initially
-      particles.push(p);
-    }
-
-    function animateParticles() {
-      ctx.clearRect(0, 0, W, H);
-      particles.forEach(p => {
-        p.update();
-        p.draw();
-      });
-      requestAnimationFrame(animateParticles);
-    }
-    animateParticles();
-
-    // ============================================
-    // ANIME.JS — Entrance animations
-    // ============================================
-    // Use CDN anime.js v4 via global
-    // anime is loaded as a global from CDN
-
-    document.addEventListener('DOMContentLoaded', () => {
-      // Wait a tick for anime.js to be ready
-      setTimeout(() => {
-        if (typeof anime === 'undefined') {
-          console.warn('Anime.js not loaded, using fallback');
-          // Fallback: just show everything
-          document.querySelectorAll('.card-anim').forEach(el => el.style.opacity = 1);
+    // ── ANIME ──
+    document.addEventListener('DOMContentLoaded',()=>{
+      setTimeout(()=>{
+        if(typeof anime==='undefined'){
+          document.querySelectorAll('.ca').forEach(e=>e.style.opacity=1);
           return;
         }
-
-        // Hero entrance timeline
-        const tl = anime.timeline({ easing: 'easeOutExpo' });
-
-        tl.add({
-          targets: '#eyebrow',
-          opacity: [0, 1],
-          translateY: [20, 0],
-          duration: 600,
-        })
-        .add({
-          targets: '.hero-title .ghost',
-          opacity: [0, 1],
-          translateX: [-40, 0],
-          duration: 700,
-        }, '-=200')
-        .add({
-          targets: '.hero-title .accent',
-          opacity: [0, 1],
-          scale: [0.5, 1],
-          duration: 800,
-        }, '-=400')
-        .add({
-          targets: '.hero-title span:last-child',
-          opacity: [0, 1],
-          translateX: [40, 0],
-          duration: 700,
-        }, '-=500')
-        .add({
-          targets: '#hero-sub-text',
-          opacity: [0, 1],
-          translateY: [15, 0],
-          duration: 600,
-        }, '-=300')
-        .add({
-          targets: '#service-tags span',
-          opacity: [0, 1],
-          translateY: [10, 0],
-          delay: anime.stagger(80),
-          duration: 500,
-        }, '-=200');
-
-        // Scroll reveal for cards
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              anime({
-                targets: entry.target,
-                opacity: [0, 1],
-                translateY: [30, 0],
-                duration: 600,
-                delay: anime.stagger(120, { from: 'first' }),
-                easing: 'easeOutExpo',
-              });
-              observer.unobserve(entry.target);
+        const tl=anime.timeline({easing:'easeOutExpo'});
+        tl.add({targets:'#eyeb',opacity:[0,1],translateY:[12,0],duration:500})
+          .add({targets:'#h1a',opacity:[0,1],translateX:[-30,0],duration:600},'-=200')
+          .add({targets:'#h1b',opacity:[0,1],scale:[.5,1],duration:700},'-=300')
+          .add({targets:'#h1c',opacity:[0,1],translateX:[30,0],duration:600},'-=400')
+          .add({targets:'#hero-p',opacity:[0,1],translateY:[12,0],duration:500},'-=300')
+          .add({targets:'#tags span',opacity:[0,1],translateY:[8,0],delay:anime.stagger(70),duration:400},'-=200');
+        const ob=new IntersectionObserver(e=>{
+          e.forEach(en=>{
+            if(en.isIntersecting){
+              anime({targets:en.target,opacity:[0,1],translateY:[24,0],duration:500,delay:anime.stagger(100,{from:'first'}),easing:'easeOutExpo'});
+              ob.unobserve(en.target);
             }
           });
-        }, { threshold: 0.15 });
-
-        document.querySelectorAll('.card-anim').forEach(el => {
-          el.style.opacity = 0;
-          observer.observe(el);
-        });
-
-        // Also animate the section titles when visible
-        document.querySelectorAll('.services-section h2, .why-section h2, .cta-band h2').forEach(el => {
-          el.style.opacity = 0;
-          observer.observe(el);
-        });
-
-      }, 200);
+        },{threshold:.1});
+        document.querySelectorAll('.ca,.sv-h,.why h2,.cta-sec h2,.cta-sec p').forEach(el=>{el.style.opacity=0;ob.observe(el)});
+      },200);
     });
-  </script>
-
-  <!-- Fallback for scroll reveal if anime fails -->
-  <noscript>
-    <style>
-      .card-anim { opacity: 1 !important; }
-      #eyebrow, .hero-title span, #hero-sub-text, #service-tags span { opacity: 1 !important; }
-    </style>
-  </noscript>
-
-  <!-- Inline fallback if anime.js fails to load -->
-  <script>
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        if (!document.querySelector('#eyebrow').style.opacity || document.querySelector('#eyebrow').style.opacity === '0') {
-          // Anime didn't run, show all manually
-          document.querySelectorAll('.card-anim, #eyebrow, .hero-title span, #hero-sub-text, #service-tags span, .services-section h2, .why-section h2, .cta-band h2').forEach(el => {
-            el.style.opacity = 1;
-          });
-        }
-      }, 3000);
-    });
+    // fallback
+    setTimeout(()=>{document.querySelectorAll('.ca').forEach(e=>{if(e.style.opacity==='0')e.style.opacity=1})},3000);
   </script>
 </body>
 </html>
