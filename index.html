@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PHANTOM — Marketing Digital de Alto Impacto</title>
+  <meta name="description" content="Phantom Web. Presencia digital profesional para negocios que quieren resultados reales." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/4.0.0-beta.3/anime.min.js" integrity="sha512-/70bP4cJjHziY5fhyivPhwhWS0Md5tLn1sQmGpP2gBxvWzDgNJPX5KVPQqQ8QxgMwjH7bHvxTF76DfDPTSn+gQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #0a0a0a;
+      --accent: #ff0030;
+      --green: #00ff41;
+      --purple: #6c00ff;
+      --orange: #ff6a00;
+      --text: #ffffff;
+      --text-dim: #666;
+      --border: #1a1a1a;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* === CANVAS PARTICLE BG === */
+    #particle-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* === PLASMA GHOST GRADIENT === */
+    #plasma {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 50% at 20% 30%, rgba(108,0,255,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 60% at 80% 70%, rgba(255,0,48,0.10) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 50% 50%, rgba(0,255,65,0.06) 0%, transparent 70%);
+      animation: plasmaMove 12s ease-in-out infinite alternate;
+    }
+    @keyframes plasmaMove {
+      0% { transform: scale(1) translate(0,0); }
+      33% { transform: scale(1.1) translate(2%,-2%); }
+      66% { transform: scale(0.95) translate(-3%,3%); }
+      100% { transform: scale(1.05) translate(1%,-1%); }
+    }
+
+    /* === CONTENT OVERLAY === */
+    .content {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* === NAV === */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+      border-bottom: 2px solid var(--border);
+    }
+    .logo {
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+    }
+    .logo span { color: var(--accent); }
+    nav .cta-small {
+      background: var(--accent);
+      color: #000;
+      border: none;
+      padding: 12px 24px;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    nav .cta-small:hover { background: #fff; color: #000; }
+
+    /* === HERO === */
+    .hero {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 40px 80px;
+      position: relative;
+    }
+    .hero-eyebrow {
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 20px;
+    }
+    .hero-title {
+      font-size: clamp(72px, 12vw, 160px);
+      font-weight: 900;
+      line-height: 0.88;
+      letter-spacing: -4px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .hero-title .accent { color: var(--accent); }
+    .hero-title .ghost { color: transparent; -webkit-text-stroke: 2px rgba(255,255,255,0.15); }
+    .hero-sub {
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--text-dim);
+      max-width: 500px;
+      margin-top: 24px;
+      line-height: 1.6;
+    }
+    .hero-services {
+      display: flex;
+      gap: 16px;
+      margin-top: 40px;
+      flex-wrap: wrap;
+    }
+    .hero-services span {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 8px 14px;
+      border: 2px solid var(--border);
+      color: var(--text-dim);
+      transition: 0.2s;
+    }
+    .hero-services span:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* === CTA BAND === */
+    .cta-band {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 40px 80px;
+      text-align: center;
+      border-top: 2px solid var(--border);
+    }
+    .cta-band h2 {
+      font-size: clamp(28px, 5vw, 56px);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+    }
+    .cta-band p {
+      font-size: 16px;
+      color: var(--text-dim);
+      margin-bottom: 40px;
+    }
+    .cta-giant {
+      display: inline-block;
+      background: var(--accent);
+      color: #000;
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(18px, 3vw, 32px);
+      font-weight: 900;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 24px 60px;
+      border: none;
+      cursor: pointer;
+      transition: 0.2s;
+      position: relative;
+    }
+    .cta-giant:hover {
+      background: #fff;
+      transform: scale(1.02);
+    }
+    .cta-giant::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 2px solid var(--accent);
+      transform: translate(6px, 6px);
+      transition: 0.2s;
+      pointer-events: none;
+    }
+    .cta-giant:hover::after {
+      transform: translate(10px, 10px);
+      border-color: #fff;
+    }
+
+    /* === SERVICES === */
+    .services-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 40px;
+    }
+    .services-section h2 {
+      font-size: clamp(32px, 4vw, 56px);
+      font-weight: 900;
+      letter-spacing: -1px;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .service-card {
+      border: 2px solid var(--border);
+      padding: 40px 32px;
+      transition: 0.3s;
+      position: relative;
+    }
+    .service-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+    }
+    .service-card .num {
+      font-size: 48px;
+      font-weight: 900;
+      color: transparent;
+      -webkit-text-stroke: 2px rgba(255,0,48,0.2);
+      margin-bottom: 16px;
+    }
+    .service-card h3 {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .service-card p {
+      font-size: 14px;
+      color: var(--text-dim);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .service-card .from {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .service-card .price {
+      font-size: 32px;
+      font-weight: 900;
+      margin-top: 4px;
+    }
+
+    /* === WHY === */
+    .why-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 40px 80px;
+      border-top: 2px solid var(--border);
+    }
+    .why-section h2 {
+      font-size: clamp(24px, 3vw, 40px);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -1px;
+      margin-bottom: 40px;
+    }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .why-item {
+      padding: 24px;
+      border: 2px solid var(--border);
+      text-align: center;
+    }
+    .why-item .icon {
+      font-size: 36px;
+      margin-bottom: 12px;
+    }
+    .why-item h4 {
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .why-item p {
+      font-size: 13px;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+
+    /* === PHANTOM TAGLINE === */
+    .phantom-tagline {
+      text-align: center;
+      padding: 40px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 8px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      border-top: 2px solid var(--border);
+    }
+    .phantom-tagline span { color: var(--accent); }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .hero { padding: 40px 20px 60px; }
+      .cta-band { padding: 40px 20px; }
+      .services-section { padding: 60px 20px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr; }
+      .why-section { padding: 40px 20px; }
+      .logo { font-size: 16px; letter-spacing: 4px; }
+    }
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .why-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="particle-canvas"></canvas>
+  <div id="plasma"></div>
+
+  <div class="content">
+    <!-- NAV -->
+    <nav>
+      <div class="logo">PHANTOM<span>.</span></div>
+      <button class="cta-small" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Agendar llamada</button>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="hero-text">
+      <div class="hero-eyebrow" id="eyebrow">╳ Marketing Digital de Alto Impacto</div>
+      <h1 class="hero-title" id="title-main">
+        <span class="ghost">PHAN</span><br />
+        <span class="accent">TOM</span><br />
+        <span>WEB</span>
+      </h1>
+      <p class="hero-sub" id="hero-sub-text">Transformamos tu negocio en una máquina de clientes. Sitio web, chatbot con IA y tienda online — todo en uno.</p>
+      <div class="hero-services" id="service-tags">
+        <span>Diseño Web</span>
+        <span>Chatbot IA</span>
+        <span>Tienda Online</span>
+        <span>SEO</span>
+        <span>Analytics</span>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="services-section" id="services">
+      <h2>Servicios</h2>
+      <div class="services-grid">
+        <div class="service-card card-anim">
+          <div class="num">01</div>
+          <h3>Diseño Web</h3>
+          <p>Sitios profesionales, rápidos y optimizados para convertir visitantes en clientes. Con WhatsApp, Google Maps y galería de trabajos.</p>
+          <div class="from">Desde</div>
+          <div class="price">$49 USD</div>
+        </div>
+        <div class="service-card card-anim">
+          <div class="num">02</div>
+          <h3>Chatbot IA</h3>
+          <p>Automatiza tu WhatsApp 24/7. Responde preguntas, agenda citas y capta leads mientras duermes. Como tener una recepcionista que nunca para.</p>
+          <div class="from">Desde</div>
+          <div class="price">$49/mes</div>
+        </div>
+        <div class="service-card card-anim">
+          <div class="num">03</div>
+          <h3>Tienda Online</h3>
+          <p>Montamos tu tienda lista para vender. Catálogo, carrito, pagos y envíos integrados. Tu negocio abierto 24/7 sin que muevas un dedo.</p>
+          <div class="from">Desde</div>
+          <div class="price">$99 USD</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY -->
+    <section class="why-section" id="why">
+      <h2>Por qué Phantom</h2>
+      <div class="why-grid">
+        <div class="why-item card-anim">
+          <div class="icon">⚡</div>
+          <h4>Velocidad</h4>
+          <p>Tu sitio listo en días, no meses. Sin vueltas ni burocracia.</p>
+        </div>
+        <div class="why-item card-anim">
+          <div class="icon">🎯</div>
+          <h4>Resultados</h4>
+          <p>Cada proyecto se mide en clientes nuevos, no en likes.</p>
+        </div>
+        <div class="why-item card-anim">
+          <div class="icon">🔧</div>
+          <h4>Soporte Real</h4>
+          <p>Te respondemos por WhatsApp. Sin tickets, sin bots, sin esperas.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-band" id="cta">
+      <h2>¿Listo para <span style="color:var(--accent)">facturar</span> más?</h2>
+      <p>Agenda una llamada de 15 minutos sin compromiso y te mostramos cómo empezar.</p>
+      <a class="cta-giant" href="#" onclick="alert('📞 Agenda tu llamada: +56 9 XXXX XXXX\nO escríbenos a phantom@email.com'); return false;">
+        Agendar llamada
+      </a>
+    </section>
+
+    <div class="phantom-tagline">
+      Phantom<span>.</span> — El lado oscuro del marketing digital
+    </div>
+  </div>
+
+  <script>
+    // ============================================
+    // PARTICLE CANVAS — Falling skulls & orbs
+    // ============================================
+    const canvas = document.getElementById('particle-canvas');
+    const ctx = canvas.getContext('2d');
+    let W, H, particles = [];
+
+    function resize() {
+      W = canvas.width = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    const PARTICLE_COUNT = 80;
+    const SYMBOLS = ['💀', '☠️', '👻', '·', '✧', '○', '◇'];
+
+    class Particle {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * W;
+        this.y = -20;
+        this.size = 8 + Math.random() * 20;
+        this.speed = 0.3 + Math.random() * 0.8;
+        this.wobble = Math.random() * Math.PI * 2;
+        this.wobbleSpeed = 0.01 + Math.random() * 0.02;
+        this.wobbleAmp = 20 + Math.random() * 40;
+        this.symbol = SYMBOLS[Math.floor(Math.random() * SYMBOLS.length)];
+        this.alpha = 0.2 + Math.random() * 0.3;
+        this.rotation = Math.random() * Math.PI * 2;
+        this.rotationSpeed = (Math.random() - 0.5) * 0.02;
+      }
+      update() {
+        this.y += this.speed;
+        this.wobble += this.wobbleSpeed;
+        this.x += Math.sin(this.wobble) * 0.5;
+        this.rotation += this.rotationSpeed;
+        if (this.y > H + 40) this.reset();
+        if (this.x < -40 || this.x > W + 40) this.reset();
+      }
+      draw() {
+        ctx.save();
+        ctx.globalAlpha = this.alpha;
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rotation);
+        ctx.font = `${this.size}px sans-serif`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(this.symbol, 0, 0);
+        ctx.restore();
+      }
+    }
+
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      const p = new Particle();
+      p.y = Math.random() * H; // spread initially
+      particles.push(p);
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, W, H);
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    // ============================================
+    // ANIME.JS — Entrance animations
+    // ============================================
+    // Use CDN anime.js v4 via global
+    // anime is loaded as a global from CDN
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Wait a tick for anime.js to be ready
+      setTimeout(() => {
+        if (typeof anime === 'undefined') {
+          console.warn('Anime.js not loaded, using fallback');
+          // Fallback: just show everything
+          document.querySelectorAll('.card-anim').forEach(el => el.style.opacity = 1);
+          return;
+        }
+
+        // Hero entrance timeline
+        const tl = anime.timeline({ easing: 'easeOutExpo' });
+
+        tl.add({
+          targets: '#eyebrow',
+          opacity: [0, 1],
+          translateY: [20, 0],
+          duration: 600,
+        })
+        .add({
+          targets: '.hero-title .ghost',
+          opacity: [0, 1],
+          translateX: [-40, 0],
+          duration: 700,
+        }, '-=200')
+        .add({
+          targets: '.hero-title .accent',
+          opacity: [0, 1],
+          scale: [0.5, 1],
+          duration: 800,
+        }, '-=400')
+        .add({
+          targets: '.hero-title span:last-child',
+          opacity: [0, 1],
+          translateX: [40, 0],
+          duration: 700,
+        }, '-=500')
+        .add({
+          targets: '#hero-sub-text',
+          opacity: [0, 1],
+          translateY: [15, 0],
+          duration: 600,
+        }, '-=300')
+        .add({
+          targets: '#service-tags span',
+          opacity: [0, 1],
+          translateY: [10, 0],
+          delay: anime.stagger(80),
+          duration: 500,
+        }, '-=200');
+
+        // Scroll reveal for cards
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              anime({
+                targets: entry.target,
+                opacity: [0, 1],
+                translateY: [30, 0],
+                duration: 600,
+                delay: anime.stagger(120, { from: 'first' }),
+                easing: 'easeOutExpo',
+              });
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.card-anim').forEach(el => {
+          el.style.opacity = 0;
+          observer.observe(el);
+        });
+
+        // Also animate the section titles when visible
+        document.querySelectorAll('.services-section h2, .why-section h2, .cta-band h2').forEach(el => {
+          el.style.opacity = 0;
+          observer.observe(el);
+        });
+
+      }, 200);
+    });
+  </script>
+
+  <!-- Fallback for scroll reveal if anime fails -->
+  <noscript>
+    <style>
+      .card-anim { opacity: 1 !important; }
+      #eyebrow, .hero-title span, #hero-sub-text, #service-tags span { opacity: 1 !important; }
+    </style>
+  </noscript>
+
+  <!-- Inline fallback if anime.js fails to load -->
+  <script>
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        if (!document.querySelector('#eyebrow').style.opacity || document.querySelector('#eyebrow').style.opacity === '0') {
+          // Anime didn't run, show all manually
+          document.querySelectorAll('.card-anim, #eyebrow, .hero-title span, #hero-sub-text, #service-tags span, .services-section h2, .why-section h2, .cta-band h2').forEach(el => {
+            el.style.opacity = 1;
+          });
+        }
+      }, 3000);
+    });
+  </script>
+</body>
+</html>
