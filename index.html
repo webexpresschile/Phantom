@@ -7,237 +7,298 @@
 <meta name="description" content="Phantom. Presencia digital para negocios que quieren ser encontrados." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/4.0.0-beta.3/anime.min.js" integrity="sha512-/70bP4cJjHziY5fhyivPhwhWS0Md5tLn1sQmGpP2gBxvWzDgNJPX5KVPQqQ8QxgMwjH7bHvxTF76DfDPTSn+gQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/4.0.0-beta.3/anime.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
+  /* SURFACE */
   --canvas:#000;
   --soft:#0d0d0d;
   --card:#1a1a1a;
   --elevated:#262626;
-  --hairline:#1a1a1a;
-  --text:#fff;
-  --dim:#555;
+
+  /* HAIRLINES */
+  --hairline:#3c3c3c;
+  --hairline-strong:#262626;
+
+  /* TEXT */
+  --on-dark:#fff;
+  --body:#bbb;
+  --body-strong:#e6e6e6;
+  --muted:#7e7e7e;
+
+  /* BRAND */
   --m-blue:#0066b1;
   --m-blue-dark:#1c69d4;
   --m-red:#e22718;
-  --light:300;
-  --regular:400;
-  --medium:500;
-  --semi:600;
-  --bold:700;
-  --heavy:800;
-  --black:900;
+
+  /* TYPOGRAPHY TOKENS */
+  --display-xl:80px;
+  --display-lg:56px;
+  --display-md:40px;
+  --display-sm:32px;
+  --title-lg:24px;
+  --title-md:20px;
+  --title-sm:18px;
+  --label-uppercase:14px;
+  --body-md:16px;
+  --body-sm:14px;
+  --caption:12px;
+  --button:14px;
+  --nav-link:14px;
+
+  --wt-display:700;
+  --wt-body:300;
+  --wt-regular:400;
+  --wt-medium:500;
+  --wt-semi:600;
+  --wt-bold:700;
+
+  --lh-tight:1.0;
+  --lh-display-lg:1.05;
+  --lh-display-md:1.1;
+  --lh-display-sm:1.15;
+  --lh-title-lg:1.3;
+  --lh-title-md:1.4;
+  --lh-body:1.5;
+  --lh-button:1.0;
+  --lh-nav:1.4;
+
+  --ls-button:1.5px;
+  --ls-label:1.5px;
+  --ls-caption:0.5px;
+  --ls-nav:0.5px;
+  --ls-display:-0.5px;
+
+  --sp-section:96px;
+  --sp-xxl:64px;
+  --sp-xl:40px;
+  --sp-lg:32px;
+  --sp-md:24px;
+  --sp-sm:16px;
 }
 body{
-  background:var(--canvas);color:var(--text);
+  background:var(--canvas);color:var(--on-dark);
   font-family:'Inter',system-ui,sans-serif;
-  font-weight:var(--light);
+  font-weight:var(--wt-body);
   -webkit-font-smoothing:antialiased;
   overflow-x:hidden;
 }
 
-/* ── M TRICOLOR STRIPE ── */
+/* ── M STRIPES ── */
 .m-stripe{
   display:block;width:100%;height:4px;
   background:linear-gradient(90deg,var(--m-blue) 0%,var(--m-blue) 33.33%,var(--m-blue-dark) 33.33%,var(--m-blue-dark) 66.66%,var(--m-red) 66.66%,var(--m-red) 100%);
 }
 .m-stripe-sm{
-  display:inline-block;width:32px;height:4px;
+  display:inline-block;width:32px;height:4px;vertical-align:middle;margin-right:8px;
   background:linear-gradient(90deg,var(--m-blue) 0%,var(--m-blue) 33.33%,var(--m-blue-dark) 33.33%,var(--m-blue-dark) 66.66%,var(--m-red) 66.66%,var(--m-red) 100%);
-  vertical-align:middle;margin-right:8px;
 }
 
 /* ── LAYOUT ── */
-.wrap{max-width:1280px;margin:0 auto;padding:0 32px}
-.full{width:100%}
+.wrap{max-width:1280px;margin:0 auto;padding:0 var(--sp-lg)}
 
 /* ── NAV ── */
 nav{
   display:flex;justify-content:space-between;align-items:center;
-  padding:24px 32px;max-width:1280px;margin:0 auto;
+  padding:var(--sp-md) var(--sp-lg);max-width:1280px;margin:0 auto;
 }
 .logo-m{
-  font-size:13px;font-weight:var(--semi);letter-spacing:4px;text-transform:uppercase;
-  display:flex;align-items:center;gap:8px;
+  font-size:var(--nav-link);font-weight:var(--wt-regular);letter-spacing:var(--ls-nav);
+  text-transform:uppercase;display:flex;align-items:center;gap:8px;
+  line-height:var(--lh-nav);
 }
 .logo-m .mark{
-  display:inline-block;width:20px;height:20px;
-  background:var(--m-red);color:#000;font-size:10px;text-align:center;line-height:20px;
-  font-weight:var(--heavy);
+  display:inline-block;width:18px;height:18px;
+  background:var(--m-red);color:#000;
+  font-size:10px;text-align:center;line-height:18px;
+  font-weight:var(--wt-bold);
 }
 .nav-cta{
-  background:transparent;color:var(--text);border:1px solid var(--text);
-  padding:10px 24px;font:600 11px/1 'Inter',sans-serif;
-  letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:.2s;
-  border-radius:0;
+  background:transparent;color:var(--on-dark);border:1px solid var(--on-dark);
+  padding:10px 20px;
+  font:var(--wt-bold) var(--button)/var(--lh-button) 'Inter',sans-serif;
+  letter-spacing:var(--ls-button);text-transform:uppercase;cursor:pointer;
+  border-radius:0;transition:.2s;
 }
-.nav-cta:hover{background:var(--text);color:#000}
+.nav-cta:hover{background:var(--on-dark);color:#000}
 
 /* ── HERO ── */
 .hero{
-  padding:96px 32px 96px;position:relative;
-  max-width:1280px;margin:0 auto;
-  border-bottom:1px solid var(--hairline);
-}
-.hero::before{
-  content:'';
-  position:absolute;top:0;left:50%;transform:translateX(-50%);
-  width:100vw;height:100%;background:var(--canvas);
-  z-index:-1;
+  padding:var(--sp-section) var(--sp-lg) var(--sp-xxl);
+  max-width:1280px;margin:0 auto;position:relative;
 }
 .hero-eyebrow{
-  font-size:11px;font-weight:var(--semi);letter-spacing:3px;
-  text-transform:uppercase;color:var(--dim);margin-bottom:32px;
+  font-size:var(--caption);font-weight:var(--wt-regular);
+  letter-spacing:var(--ls-caption);text-transform:uppercase;
+  color:var(--muted);margin-bottom:var(--sp-lg);
   display:flex;align-items:center;
 }
 .hero h1{
-  font-size:clamp(48px,7vw,96px);
-  font-weight:var(--bold);line-height:.92;letter-spacing:-2px;
-  text-transform:uppercase;max-width:900px;
+  font-size:clamp(48px,7vw,var(--display-xl));
+  font-weight:var(--wt-display);line-height:var(--lh-tight);
+  letter-spacing:var(--ls-display);text-transform:uppercase;
+  max-width:900px;
 }
-.hero h1 .hl{color:var(--dim);font-weight:var(--light);}
+.hero h1 .hl{color:var(--muted);font-weight:var(--wt-body);letter-spacing:var(--ls-display);}
 .hero h1 .accent{color:var(--m-red);}
 .hero p{
-  font-size:15px;font-weight:var(--light);color:var(--dim);
-  max-width:520px;margin-top:32px;line-height:1.7;
+  font-size:var(--body-sm);font-weight:var(--wt-body);
+  color:var(--body);max-width:520px;
+  margin-top:var(--sp-lg);line-height:var(--lh-body);
 }
 .hero-tags{
-  display:flex;gap:24px;margin-top:48px;flex-wrap:wrap;
+  display:flex;gap:var(--sp-md);margin-top:48px;flex-wrap:wrap;
 }
 .hero-tags span{
-  font:600 10px/1 'Inter',sans-serif;letter-spacing:2px;
-  text-transform:uppercase;color:var(--dim);
-  padding:0;border:none;
+  font:var(--wt-semi) var(--caption)/1 'Inter',sans-serif;
+  letter-spacing:var(--ls-caption);text-transform:uppercase;
+  color:var(--muted);border:none;padding:0;
 }
 
 /* ── SECTION DIVIDER ── */
-.sec-divider{
-  height:1px;background:var(--hairline);border:none;margin:0;
-}
+.sec-divider{height:1px;background:var(--hairline);border:none;margin:0}
 
 /* ── SERVICES ── */
-.sv{padding:96px 32px;max-width:1280px;margin:0 auto}
-.sv-hdr{
-  display:flex;align-items:center;gap:16px;margin-bottom:64px;
-}
+.sv{padding:var(--sp-section) var(--sp-lg);max-width:1280px;margin:0 auto}
+.sv-hdr{display:flex;align-items:center;gap:var(--sp-sm);margin-bottom:var(--sp-xxl)}
 .sv-hdr h2{
-  font-size:clamp(24px,3vw,40px);font-weight:var(--bold);
-  text-transform:uppercase;letter-spacing:-1px;color:var(--text);
+  font-size:clamp(28px,3vw,var(--display-lg));
+  font-weight:var(--wt-display);line-height:var(--lh-display-lg);
+  letter-spacing:var(--ls-display);text-transform:uppercase;
 }
-.sv-hdr .count{font-size:11px;font-weight:var(--semi);letter-spacing:3px;color:var(--dim);text-transform:uppercase}
+.sv-hdr .count{
+  font-size:var(--caption);font-weight:var(--wt-regular);
+  letter-spacing:var(--ls-caption);text-transform:uppercase;
+  color:var(--muted);
+}
 .sv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--hairline)}
-.sv-card{
-  background:var(--canvas);padding:48px 40px;
-  display:flex;flex-direction:column;
-}
+.sv-card{background:var(--canvas);padding:48px var(--sp-xl);display:flex;flex-direction:column}
 .sv-card .n{
-  font-size:12px;font-weight:var(--semi);letter-spacing:2px;
-  color:var(--dim);text-transform:uppercase;margin-bottom:20px;
+  font-size:var(--caption);font-weight:var(--wt-semi);
+  letter-spacing:var(--ls-caption);color:var(--muted);
+  text-transform:uppercase;margin-bottom:var(--sp-md);
 }
 .sv-card h3{
-  font-size:18px;font-weight:var(--semi);letter-spacing:2px;
-  text-transform:uppercase;margin-bottom:12px;
+  font-size:var(--title-lg);font-weight:var(--wt-display);
+  line-height:var(--lh-title-lg);text-transform:uppercase;
+  margin-bottom:var(--sp-sm);
 }
 .sv-card p{
-  font-size:13px;font-weight:var(--light);color:var(--dim);
-  line-height:1.7;margin-bottom:24px;flex:1;
+  font-size:var(--body-sm);font-weight:var(--wt-body);
+  color:var(--body);line-height:var(--lh-body);
+  margin-bottom:var(--sp-md);flex:1;
 }
 .sv-card .price-line{
-  display:flex;align-items:baseline;gap:12px;
-  border-top:1px solid var(--hairline);padding-top:20px;
+  display:flex;align-items:baseline;gap:var(--sp-sm);
+  border-top:1px solid var(--hairline-strong);padding-top:var(--sp-md);
 }
 .sv-card .price-line .tag{
-  font:600 10px/1 'Inter',sans-serif;letter-spacing:2px;
-  text-transform:uppercase;color:var(--dim);
+  font:var(--wt-semi) var(--caption)/1 'Inter',sans-serif;
+  letter-spacing:var(--ls-caption);text-transform:uppercase;
+  color:var(--muted);
 }
 .sv-card .price-line .amt{
-  font-size:24px;font-weight:var(--bold);color:var(--text);
+  font-size:var(--display-sm);font-weight:var(--wt-display);
+  line-height:var(--lh-display-sm);color:var(--on-dark);
 }
 .sv-card:hover{background:var(--soft)}
 .sv-card:hover .price-line .amt{color:var(--m-red)}
 
 /* ── WHY ── */
-.why{padding:96px 32px;max-width:1280px;margin:0 auto}
+.why{padding:var(--sp-section) var(--sp-lg);max-width:1280px;margin:0 auto}
 .why h2{
-  font-size:clamp(24px,3vw,40px);font-weight:var(--bold);
-  text-transform:uppercase;letter-spacing:-1px;margin-bottom:64px;
+  font-size:clamp(24px,3vw,var(--display-lg));
+  font-weight:var(--wt-display);line-height:var(--lh-display-lg);
+  letter-spacing:var(--ls-display);text-transform:uppercase;
+  margin-bottom:var(--sp-xxl);
 }
 .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--hairline)}
-.why-item{background:var(--canvas);padding:48px 40px}
+.why-item{background:var(--canvas);padding:48px var(--sp-xl)}
 .why-item .br{
   display:flex;align-items:center;gap:8px;
-  font-size:11px;font-weight:var(--semi);letter-spacing:2px;
-  color:var(--dim);text-transform:uppercase;margin-bottom:24px;
+  font-size:var(--caption);font-weight:var(--wt-regular);
+  letter-spacing:var(--ls-caption);color:var(--muted);
+  text-transform:uppercase;margin-bottom:var(--sp-md);
 }
 .why-item h4{
-  font-size:16px;font-weight:var(--semi);letter-spacing:2px;
-  text-transform:uppercase;margin-bottom:10px;
+  font-size:var(--title-md);font-weight:var(--wt-display);
+  line-height:var(--lh-title-md);text-transform:uppercase;
+  margin-bottom:10px;
 }
-.why-item p{font-size:13px;font-weight:var(--light);color:var(--dim);line-height:1.7}
+.why-item p{
+  font-size:var(--body-sm);font-weight:var(--wt-body);
+  color:var(--body);line-height:var(--lh-body);
+}
 .why-item:hover{background:var(--soft)}
 
-/* ── FULL-BLEED BAND (like M photography) ── */
+/* ── FULL-BLEED BAND ── */
 .band{
-  width:100%;padding:96px 0;
-  background:var(--soft);
-  position:relative;
-  border-top:1px solid var(--hairline);
-  border-bottom:1px solid var(--hairline);
+  width:100%;padding:var(--sp-section) 0;
+  background:var(--soft);position:relative;
+  border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);
 }
-.band-inner{max-width:1280px;margin:0 auto;padding:0 32px}
+.band-inner{max-width:1280px;margin:0 auto;padding:0 var(--sp-lg)}
 .band h2{
-  font-size:clamp(20px,2.5vw,32px);font-weight:var(--bold);
-  text-transform:uppercase;letter-spacing:-1px;max-width:600px;margin-bottom:16px;
+  font-size:clamp(20px,2.5vw,var(--display-md));
+  font-weight:var(--wt-display);line-height:var(--lh-display-md);
+  letter-spacing:var(--ls-display);text-transform:uppercase;
+  max-width:600px;margin-bottom:var(--sp-sm);
 }
-.band p{font-size:13px;font-weight:var(--light);color:var(--dim);max-width:480px;line-height:1.7}
+.band p{
+  font-size:var(--body-sm);font-weight:var(--wt-body);
+  color:var(--body);max-width:480px;line-height:var(--lh-body);
+}
 
 /* ── CTA ── */
 .cta-sec{
-  padding:96px 32px;max-width:1280px;margin:0 auto;
+  padding:var(--sp-section) var(--sp-lg);max-width:1280px;margin:0 auto;
   text-align:center;
 }
 .cta-sec h2{
-  font-size:clamp(28px,4vw,56px);font-weight:var(--bold);
-  text-transform:uppercase;letter-spacing:-2px;margin-bottom:12px;
+  font-size:clamp(28px,4vw,var(--display-lg));
+  font-weight:var(--wt-display);line-height:var(--lh-display-lg);
+  letter-spacing:var(--ls-display);text-transform:uppercase;
+  margin-bottom:var(--sp-sm);
 }
-.cta-sec h2 .hl{font-weight:var(--light);color:var(--dim)}
-.cta-sec p{font-size:13px;font-weight:var(--light);color:var(--dim);margin-bottom:48px}
+.cta-sec h2 .hl{font-weight:var(--wt-body);color:var(--muted)}
+.cta-sec p{
+  font-size:var(--body-sm);font-weight:var(--wt-body);
+  color:var(--body);margin-bottom:48px;
+}
 .btn-primary{
-  display:inline-block;background:transparent;color:var(--text);
-  border:1px solid var(--text);border-radius:0;
-  font:600 12px/1 'Inter',sans-serif;letter-spacing:3px;
-  text-transform:uppercase;text-decoration:none;
-  padding:16px 40px;cursor:pointer;transition:.2s;
+  display:inline-block;background:transparent;color:var(--on-dark);
+  border:1px solid var(--on-dark);border-radius:0;
+  font:var(--wt-display) var(--button)/var(--lh-button) 'Inter',sans-serif;
+  letter-spacing:var(--ls-button);text-transform:uppercase;
+  text-decoration:none;padding:16px var(--sp-xl);cursor:pointer;transition:.2s;
 }
-.btn-primary:hover{background:var(--text);color:#000}
-.btn-primary::after{display:none}
+.btn-primary:hover{background:var(--on-dark);color:#000}
 
 /* ── FOOTER ── */
 footer{
   border-top:1px solid var(--hairline);text-align:center;
-  padding:32px;max-width:1280px;margin:0 auto;
+  padding:var(--sp-lg);max-width:1280px;margin:0 auto;
 }
 footer p{
-  font:600 9px/1 'Inter',sans-serif;letter-spacing:4px;
-  text-transform:uppercase;color:var(--dim);
+  font:var(--wt-semi) var(--caption)/1 'Inter',sans-serif;
+  letter-spacing:2px;text-transform:uppercase;color:var(--muted);
 }
-footer .m-stripe-sm{display:block;margin:0 auto 16px}
+footer .m-stripe-sm{display:block;margin:0 auto var(--sp-sm)}
 
 /* ── RESPONSIVE ── */
 @media(max-width:768px){
-  nav{padding:16px}
-  .hero{padding:48px 16px 64px}
-  .sv,.why{padding:64px 16px}
+  nav{padding:var(--sp-sm)}
+  .hero{padding:48px var(--sp-sm) var(--sp-xl)}
+  .sv,.why{padding:var(--sp-section) var(--sp-sm)}
   .sv-grid,.why-grid{grid-template-columns:1fr}
-  .sv-card{padding:32px 24px}
-  .why-item{padding:32px 24px}
+  .sv-card,.why-item{padding:var(--sp-lg) var(--sp-md)}
   .band{padding:48px 0}
-  .cta-sec{padding:64px 16px}
-  .wrap{padding:0 16px}
-  .band-inner{padding:0 16px}
+  .cta-sec{padding:var(--sp-xl) var(--sp-sm)}
+  .wrap,.band-inner{padding:0 var(--sp-sm)}
   .hero h1{font-size:clamp(36px,13vw,56px)}
-  .hero-tags{gap:16px}
+  .hero-tags{gap:var(--sp-sm)}
+  :root{--display-lg:36px;--display-xl:56px}
 }
 @media(min-width:769px)and(max-width:1024px){
   .sv-grid,.why-grid{grid-template-columns:repeat(2,1fr)}
@@ -246,7 +307,6 @@ footer .m-stripe-sm{display:block;margin:0 auto 16px}
 </head>
 <body>
 
-<!-- M TRICOLOR STRIPE TOP -->
 <div class="m-stripe"></div>
 
 <nav>
@@ -254,7 +314,6 @@ footer .m-stripe-sm{display:block;margin:0 auto 16px}
   <button class="nav-cta" onclick="document.getElementById('cta-main').scrollIntoView({behavior:'smooth'})">Agendar llamada</button>
 </nav>
 
-<!-- HERO -->
 <section class="hero" id="hero-e">
   <div class="hero-eyebrow" id="eyeb"><span class="m-stripe-sm"></span> Marketing digital</div>
   <h1>
@@ -275,7 +334,6 @@ footer .m-stripe-sm{display:block;margin:0 auto 16px}
 
 <hr class="sec-divider" />
 
-<!-- SERVICES -->
 <section class="sv" id="sv-sec">
   <div class="sv-hdr">
     <h2 class="ca">Servicios</h2>
@@ -297,7 +355,7 @@ footer .m-stripe-sm{display:block;margin:0 auto 16px}
     <div class="sv-card ca">
       <div class="n">03</div>
       <h3>Tienda Online</h3>
-      <p>Montamos tu tienda lista para vender. Catálogo, carrito de compras y pagos integrados. Tú te encargas del producto, nosotros de la tecnología.</p>
+      <p>Montamos tu tienda lista para vender. Catálogo, carrito de compras y pagos integrados. Tu te encargas del producto, nosotros de la tecnologia.</p>
       <div class="price-line"><span class="tag">Desde</span><span class="amt">$99 USD</span></div>
     </div>
   </div>
@@ -305,44 +363,41 @@ footer .m-stripe-sm{display:block;margin:0 auto 16px}
 
 <hr class="sec-divider" />
 
-<!-- BAND: Full-bleed like M photography -->
 <section class="band">
   <div class="band-inner">
     <h2 class="ca">Tres razones para dejar de ser fantasma</h2>
-    <p class="ca">No medimos éxito en likes ni seguidores. Medimos en clientes nuevos que llegan a tu negocio a través de Google.</p>
+    <p class="ca">No medimos exito en likes ni seguidores. Medimos en clientes nuevos que llegan a tu negocio a traves de Google.</p>
   </div>
 </section>
 
 <hr class="sec-divider" />
 
-<!-- WHY -->
 <section class="why" id="wy-sec">
   <h2 class="ca">Por que Phantom</h2>
   <div class="why-grid">
     <div class="why-item ca">
       <div class="br"><span class="m-stripe-sm"></span> 01</div>
       <h4>Velocidad</h4>
-      <p>Tu sitio listo en 72 horas. Sin reuniones eternas ni consultorías. Hablamos, definimos y ejecutamos.</p>
+      <p>Tu sitio listo en 72 horas. Sin reuniones eternas ni consultorias. Hablamos, definimos y ejecutamos.</p>
     </div>
     <div class="why-item ca">
       <div class="br"><span class="m-stripe-sm"></span> 02</div>
       <h4>Resultados</h4>
-      <p>Cada proyecto se construye para una sola métrica: que más clientes lleguen a tu puerta. Sin métricas vanity.</p>
+      <p>Cada proyecto se construye para una sola metrica: que mas clientes lleguen a tu puerta. Sin metricas vanity.</p>
     </div>
     <div class="why-item ca">
       <div class="br"><span class="m-stripe-sm"></span> 03</div>
       <h4>Soporte real</h4>
-      <p>WhatsApp directo con el equipo que construyó tu sitio. Sin tickets, sin chatbots, sin esperas de 48 horas.</p>
+      <p>WhatsApp directo con el equipo que construyo tu sitio. Sin tickets, sin chatbots, sin esperas de 48 horas.</p>
     </div>
   </div>
 </section>
 
 <hr class="sec-divider" />
 
-<!-- CTA -->
 <section class="cta-sec" id="cta-main">
   <h2>Tu negocio merece <span class="hl">ser visto</span></h2>
-  <p>15 minutos. Sin compromiso. Te mostramos cómo aparecer en Google y empezar a recibir clientes.</p>
+  <p>15 minutos. Sin compromiso. Te mostramos como aparecer en Google y empezar a recibir clientes.</p>
   <button class="btn-primary">Agendar llamada</button>
 </section>
 
@@ -354,7 +409,6 @@ footer .m-stripe-sm{display:block;margin:0 auto 16px}
 </footer>
 
 <script>
-// ── ANIME ──
 document.addEventListener('DOMContentLoaded',()=>{
   setTimeout(()=>{
     if(typeof anime==='undefined'){document.querySelectorAll('.ca').forEach(e=>e.style.opacity=1);return}
