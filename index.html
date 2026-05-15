@@ -28,11 +28,30 @@ body{
 .msm{display:inline-block;width:32px;height:4px;vertical-align:middle;margin-right:var(--s8);background:linear-gradient(90deg,var(--b1) 0%,var(--b1) 33.33%,var(--b2) 33.33%,var(--b2) 66.66%,var(--r) 66.66%,var(--r) 100%)}
 
 /* ── NAV 64px ── */
-nav{display:flex;justify-content:space-between;align-items:center;height:64px;padding:0 var(--s40);max-width:var(--mx);margin:0 auto}
+nav{display:flex;justify-content:space-between;align-items:center;height:64px;padding:0 var(--s40);max-width:var(--mx);margin:0 auto;position:relative}
 .lm{display:flex;align-items:center;gap:var(--s8);font-size:14px;font-weight:400;letter-spacing:.5px;text-transform:uppercase;line-height:1.4}
 .lm .mk{display:inline-block;width:18px;height:18px;background:var(--r);color:#000;font-size:10px;text-align:center;line-height:18px;font-weight:700}
 .nc{background:transparent;color:var(--tx);border:1px solid var(--tx);border-radius:0;height:40px;padding:0 24px;font:700 14px/1 'Inter',sans-serif;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:.15s;display:flex;align-items:center}
 .nc:hover{background:var(--tx);color:#000}
+
+/* Hamburger - hidden on desktop */
+.hamb{display:none;flex-direction:column;justify-content:center;align-items:center;width:40px;height:40px;background:none;border:none;cursor:pointer;gap:5px;padding:0}
+.hamb span{display:block;width:20px;height:2px;background:var(--tx);transition:.2s}
+.hamb.active span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamb.active span:nth-child(2){opacity:0}
+.hamb.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* Mobile overlay */
+.overlay{display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:var(--can);z-index:1000;flex-direction:column;padding:var(--s24)}
+.overlay .ms{flex-shrink:0}
+.overlay .close{position:absolute;top:var(--s16);right:var(--s16);width:40px;height:40px;background:none;border:none;cursor:pointer;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px}
+.overlay .close span{display:block;width:20px;height:2px;background:var(--tx)}
+.overlay .close span:nth-child(1){transform:rotate(45deg)}
+.overlay .close span:nth-child(2){transform:rotate(-45deg);margin-top:-2px}
+.overlay .nav-links{display:flex;flex-direction:column;gap:var(--s8);margin-top:var(--s64)}
+.overlay .nav-links a{font:700 14px/1 'Inter',sans-serif;letter-spacing:1.5px;text-transform:uppercase;color:var(--bd);text-decoration:none;padding:var(--s12) 0;transition:.15s}
+.overlay .nav-links a:hover{color:var(--tx)}
+.overlay .nc{margin-top:auto;width:100%;justify-content:center;height:48px}
 
 /* ── HERO ── */
 .hr{padding:var(--s96) var(--s40) var(--s64);max-width:var(--mx);margin:0 auto}
@@ -46,7 +65,7 @@ nav{display:flex;justify-content:space-between;align-items:center;height:64px;pa
 
 /* ── CATEGORY TABS ── */
 .cat-tabs{display:flex;gap:var(--s24);margin-bottom:var(--s64);flex-wrap:wrap}
-.cat-tab{font:700 14px/1.3 'Inter',sans-serif;letter-spacing:1.5px;text-transform:uppercase;color:var(--bd);background:none;border:none;border-radius:0;cursor:pointer;padding:0 0 4px;transition:.15s}
+.cat-tab{font:700 14px/1.3 'Inter',sans-serif;letter-spacing:1.5px;text-transform:uppercase;color:var(--bd);background:none;border:none;border-radius:0;cursor:pointer;padding:var(--s12) 0 4px;transition:.15s;min-height:44px}
 .cat-tab:hover{color:var(--tx)}
 .cat-tab.active{color:var(--tx);border-bottom:2px solid var(--tx)}
 
@@ -55,7 +74,6 @@ nav{display:flex;justify-content:space-between;align-items:center;height:64px;pa
 
 /* ── SERVICES (feature-photo-card) ── */
 .sv{padding:var(--s96) var(--s40);max-width:var(--mx);margin:0 auto}
-.sv h2{font-size:clamp(28px,3vw,56px);font-weight:700;line-height:1.05;letter-spacing:-.5px;text-transform:uppercase;margin-bottom:var(--s24)}
 .sv-gr{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s24)}
 .sv-cd{background:var(--card);padding:var(--s24);display:flex;flex-direction:column;border-radius:0;transition:.2s}
 .sv-cd .n{font-size:12px;font-weight:600;letter-spacing:.5px;color:var(--mt);text-transform:uppercase;margin-bottom:var(--s16)}
@@ -92,7 +110,7 @@ nav{display:flex;justify-content:space-between;align-items:center;height:64px;pa
 .tl:hover{color:var(--r)}
 .tl::after{content:'→';font-size:16px}
 
-/* ── FORM SECTION ── */
+/* ── FORM ── */
 .fm{padding:var(--s96) var(--s40);max-width:var(--mx);margin:0 auto}
 .fm h2{font-size:clamp(28px,3vw,56px);font-weight:700;line-height:1.05;letter-spacing:-.5px;text-transform:uppercase;margin-bottom:var(--s24)}
 .fm p{font-size:14px;font-weight:300;color:var(--bd);margin-bottom:var(--s64);max-width:480px;line-height:1.5}
@@ -105,8 +123,7 @@ nav{display:flex;justify-content:space-between;align-items:center;height:64px;pa
 .fm-ta{width:100%;background:var(--card);color:var(--tx);border:1px solid var(--hl);border-radius:0;height:120px;padding:var(--s12) var(--s16);font:400 16px/1.5 'Inter',sans-serif;outline:none;transition:.15s;resize:vertical}
 .fm-ta:focus{border-color:var(--tx)}
 .fm-ta::placeholder{color:var(--mt)}
-.fm .btn-p{display:inline-flex;align-items:center;background:transparent;color:var(--tx);border:1px solid var(--tx);border-radius:0;height:48px;padding:0 32px;font:700 14px/1 'Inter',sans-serif;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:.2s;margin-top:var(--s24)}
-.fm .btn-p:hover{background:var(--tx);color:#000}
+.fm .btn-p{height:48px;display:inline-flex;align-items:center}
 
 /* ── CTA ── */
 .ct{padding:var(--s96) var(--s40);max-width:var(--mx);margin:0 auto;text-align:center}
@@ -116,7 +133,7 @@ nav{display:flex;justify-content:space-between;align-items:center;height:64px;pa
 .btn-p{display:inline-flex;align-items:center;background:transparent;color:var(--tx);border:1px solid var(--tx);border-radius:0;height:48px;padding:0 32px;font:700 14px/1 'Inter',sans-serif;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:.2s}
 .btn-p:hover{background:var(--tx);color:#000}
 
-/* ── COOKIE CONSENT ── */
+/* ── COOKIE ── */
 .ck{position:fixed;bottom:var(--s24);right:var(--s24);max-width:340px;background:var(--can);border:1px solid var(--hl);border-radius:0;padding:var(--s24);z-index:100;display:none}
 .ck p{font-size:14px;font-weight:300;color:var(--bd);line-height:1.5;margin-bottom:var(--s24)}
 .ck .btn-p{height:40px;padding:0 20px;display:flex;align-items:center}
@@ -134,27 +151,58 @@ nav{display:flex;justify-content:space-between;align-items:center;height:64px;pa
 .ft-bot p{font:400 12px/1.4 'Inter',sans-serif;letter-spacing:.5px;color:var(--mt)}
 
 /* ── RESPONSIVE ── */
-@media(max-width:768px){
+
+/* Mobile < 768px */
+@media(max-width:767px){
   nav{height:56px;padding:0 var(--s16)}
+  .nc.desktop-only{display:none}
+  .hamb{display:flex}
+  .overlay.show{display:flex}
   .hr{padding:48px var(--s16) var(--s40)}
+  .hr h1{font-size:clamp(36px,13vw,48px)}
+  .hr-ey{font-size:10px}
+  .hr p{font-size:13px}
+  .ht{gap:var(--s12);margin-top:32px}
+  .ht span{font-size:10px}
   .sv,.wy,.fm,.ct{padding:var(--s96) var(--s16)}
   .sv-gr,.wy-gr{grid-template-columns:1fr;gap:var(--s12)}
   .fm-gr{grid-template-columns:1fr}
   .bd{padding:48px 0}
   .bd-in{padding:0 var(--s16)}
-  .hr h1{font-size:clamp(36px,13vw,56px)}
-  .ht{gap:var(--s16)}
-  .ft{grid-template-columns:1fr 1fr;padding:var(--s40) var(--s16);gap:var(--s24)}
+  .cat-tabs{overflow-x:auto;-webkit-overflow-scrolling:touch;flex-wrap:nowrap;gap:var(--s16);padding-bottom:var(--s8);margin-bottom:var(--s40)}
+  .ft{grid-template-columns:1fr;padding:var(--s40) var(--s16);gap:var(--s24)}
   .ft-bot{padding:var(--s16)}
   .ck{left:var(--s16);right:var(--s16);max-width:none;bottom:var(--s16)}
-  .cat-tabs{overflow-x:auto;-webkit-overflow-scrolling:touch;flex-wrap:nowrap;gap:var(--s16);padding-bottom:var(--s8)}
+  .sv-cd .pr .a,.wy-it .vl{font-size:28px}
 }
-@media(min-width:769px)and(max-width:1024px){
+
+/* Tablet 768–1024px */
+@media(min-width:768px)and(max-width:1024px){
+  nav{padding:0 var(--s24)}
+  .hamb{display:none}
+  .nc.desktop-only{display:flex}
+  .hr{padding:var(--s64) var(--s24) var(--s40)}
+  .sv,.wy,.fm,.ct{padding:var(--s96) var(--s24)}
   .sv-gr{grid-template-columns:repeat(2,1fr)}
   .wy-gr{grid-template-columns:repeat(2,1fr)}
-  .ft{grid-template-columns:repeat(2,1fr)}
+  .bd-in{padding:0 var(--s24)}
+  .ft{padding:var(--s40) var(--s24);grid-template-columns:repeat(2,1fr)}
+  .ft-bot{padding:var(--s16) var(--s24)}
 }
-@media(min-width:1025px){.ck{display:block}}
+
+/* Desktop 1024+ and wide >1440px */
+@media(min-width:1025px){
+  .hamb{display:none}
+  .nc.desktop-only{display:flex}
+  .overlay{display:none!important} /* ensure overlay always hidden on desktop */
+  .ck{display:block}
+}
+@media(min-width:1441px){
+  .hr,.sv,.wy,.fm,.ct,.bd-in{padding-left:calc((100vw - var(--mx))/2 + var(--s40));padding-right:calc((100vw - var(--mx))/2 + var(--s40))}
+  .ft{padding-left:calc((100vw - var(--mx))/2 + var(--s40));padding-right:calc((100vw - var(--mx))/2 + var(--s40))}
+  .ft-bot{padding-left:calc((100vw - var(--mx))/2 + var(--s40));padding-right:calc((100vw - var(--mx))/2 + var(--s40))}
+  nav{padding-left:calc((100vw - var(--mx))/2 + var(--s40));padding-right:calc((100vw - var(--mx))/2 + var(--s40))}
+}
 </style>
 </head>
 <body>
@@ -163,8 +211,25 @@ nav{display:flex;justify-content:space-between;align-items:center;height:64px;pa
 
 <nav>
   <div class="lm"><span class="mk">P</span> PHANTOM</div>
-  <button class="nc" onclick="document.getElementById('cta-main').scrollIntoView({behavior:'smooth'})">Agendar llamada</button>
+  <button class="hamb" id="hambBtn" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <button class="nc desktop-only" onclick="document.getElementById('cta-main').scrollIntoView({behavior:'smooth'})">Agendar llamada</button>
 </nav>
+
+<!-- Mobile overlay -->
+<div class="overlay" id="mobileOverlay">
+  <div class="ms"></div>
+  <button class="close" id="closeOverlay" aria-label="Cerrar">
+    <span></span><span></span>
+  </button>
+  <div class="nav-links">
+    <a href="#" onclick="closeNav();document.getElementById('sv-sec').scrollIntoView({behavior:'smooth'})">Servicios</a>
+    <a href="#" onclick="closeNav();document.getElementById('wy-sec').scrollIntoView({behavior:'smooth'})">Por que Phantom</a>
+    <a href="#" onclick="closeNav();document.getElementById('fm-sec').scrollIntoView({behavior:'smooth'})">Contacto</a>
+  </div>
+  <button class="nc" onclick="closeNav();document.getElementById('cta-main').scrollIntoView({behavior:'smooth'})">Agendar llamada</button>
+</div>
 
 <section class="hr" id="hero-e">
   <div class="hr-ey" id="eyeb"><span class="msm"></span> Marketing digital</div>
@@ -187,7 +252,7 @@ nav{display:flex;justify-content:space-between;align-items:center;height:64px;pa
 <hr class="sd" />
 
 <section class="sv" id="sv-sec">
-  <h2 class="rv">Servicios</h2>
+  <h2 class="rv" style="margin-bottom:var(--s24)">Servicios</h2>
   <div class="cat-tabs rv" id="ctabs">
     <button class="cat-tab active" data-filter="all">Todos</button>
     <button class="cat-tab" data-filter="web">Diseno Web</button>
@@ -198,7 +263,7 @@ nav{display:flex;justify-content:space-between;align-items:center;height:64px;pa
     <div class="sv-cd rv" data-cat="web">
       <div class="n">01</div>
       <h3>Diseno Web</h3>
-      <p>Paginas profesionales, rapidas y optimizadas para conversión. Conectamos WhatsApp, Google Maps y galería de trabajos. Tu negocio abierto 24/7.</p>
+      <p>Paginas profesionales, rapidas y optimizadas para conversión. Conectamos WhatsApp, Google Maps y galeria de trabajos. Tu negocio abierto 24/7.</p>
       <div class="pr"><span class="t">Desde</span><span class="a">$49 USD</span></div>
       <a href="#" class="tl" onclick="event.preventDefault();document.getElementById('cta-main').scrollIntoView({behavior:'smooth'})">Ver planes</a>
     </div>
@@ -206,7 +271,7 @@ nav{display:flex;justify-content:space-between;align-items:center;height:64px;pa
       <div class="n">02</div>
       <h3>Chatbot IA</h3>
       <p>Automatiza tu WhatsApp. Responde preguntas, agenda citas y capta leads automaticamente. Como tener una recepcionista que nunca descansa.</p>
-      <div class="pr"><span class="t">Desde</span><span class="a">$49 /mes</span></div>
+      <div class="pr"><span class="t">Desde</span><span class="amt">$49 /mes</span></div>
       <a href="#" class="tl" onclick="event.preventDefault();document.getElementById('cta-main').scrollIntoView({behavior:'smooth'})">Ver planes</a>
     </div>
     <div class="sv-cd rv" data-cat="tienda">
@@ -319,7 +384,17 @@ nav{display:flex;justify-content:space-between;align-items:center;height:64px;pa
 </div>
 
 <script>
-// ── COOKIE BANNER ──
+// ── HAMBURGER NAV ──
+const hambBtn=document.getElementById('hambBtn');
+const overlay=document.getElementById('mobileOverlay');
+const closeBtn=document.getElementById('closeOverlay');
+function openNav(){overlay.classList.add('show');document.body.style.overflow='hidden'}
+function closeNav(){overlay.classList.remove('show');document.body.style.overflow=''}
+hambBtn.addEventListener('click',openNav);
+closeBtn.addEventListener('click',closeNav);
+overlay.addEventListener('click',(e)=>{if(e.target===overlay)closeNav()});
+
+// ── COOKIE ──
 setTimeout(()=>{document.getElementById('cookie-banner').style.display='block'},2000);
 
 // ── CATEGORY TABS ──
@@ -329,11 +404,7 @@ document.querySelectorAll('.cat-tab').forEach(tab=>{
     tab.classList.add('active');
     const filter=tab.dataset.filter;
     document.querySelectorAll('.sv-cd').forEach(card=>{
-      if(filter==='all'||card.dataset.cat===filter){
-        card.style.display='flex';
-      }else{
-        card.style.display='none';
-      }
+      card.style.display=(filter==='all'||card.dataset.cat===filter)?'flex':'none';
     });
   });
 });
