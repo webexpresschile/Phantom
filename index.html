@@ -3,439 +3,411 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>PHANTOM — Presencia Digital Moderna</title>
-<meta name="description" content="Phantom. Presencia digital para negocios que quieren ser encontrados." />
+<title>PHANTOM — Presencia Digital</title>
+<meta name="description" content="Phantom. Presencia digital para negocios." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/4.0.0-beta.3/anime.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#080808;
-  --surface:#121212;
-  --surface-elevated:#1c1c1c;
-  --border:#222;
-  --border-light:#333;
-  --text:#f0f0f0;
-  --text-secondary:#888;
-  --text-muted:#555;
-  --accent:#e22718;
-  --accent-hover:#ff3a29;
-  --accent-subtle:rgba(226,39,24,0.08);
-  --radius-sm:6px;
-  --radius-md:8px;
-  --radius-lg:12px;
-  --radius-xl:16px;
-  --max-w:1200px;
-  --nav-h:64px;
+  --bg:#080808; --surface:#121212; --elevated:#1c1c1c; --border:#222; --border-l:#333;
+  --text:#f0f0f0; --ts:#888; --tm:#555;
+  --accent:#e22718; --accent-h:#ff3a29; --accent-s:rgba(226,39,24,0.08);
+  --r6:6px; --r8:8px; --r12:12px; --r16:16px;
+  --mx:1200px;
 }
-body{
-  background:var(--bg);color:var(--text);
-  font-family:'Inter',system-ui,sans-serif;
-  font-weight:400;-webkit-font-smoothing:antialiased;
-  overflow-x:hidden;line-height:1.6;
-}
+body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 
-/* ── HERO BACKGROUND GRADIENT ── */
-.hero-bg{
-  position:fixed;top:0;left:0;width:100vw;height:100vh;
-  z-index:0;pointer-events:none;overflow:hidden;
-}
-.hero-bg .orb{
-  position:absolute;border-radius:50%;filter:blur(80px);
-  animation:orbit 20s ease-in-out infinite alternate;
-}
-.hero-bg .orb:nth-child(1){width:500px;height:500px;background:rgba(226,39,24,0.06);top:-10%;left:-5%;animation-duration:25s}
-.hero-bg .orb:nth-child(2){width:400px;height:400px;background:rgba(100,100,255,0.04);bottom:-10%;right:-5%;animation-duration:20s;animation-delay:-5s}
-.hero-bg .orb:nth-child(3){width:300px;height:300px;background:rgba(226,39,24,0.03);top:40%;left:50%;animation-duration:18s;animation-delay:-10s}
-@keyframes orbit{
-  0%{transform:translate(0,0)scale(1)}
-  50%{transform:translate(30px,-20px)scale(1.1)}
-  100%{transform:translate(-20px,30px)scale(0.9)}
-}
+/* ── orbes ── */
+.orb-bg{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;pointer-events:none;overflow:hidden}
+.orb-bg .o{position:absolute;border-radius:50%;filter:blur(80px);animation:oz 20s ease-in-out infinite alternate}
+.orb-bg .o:nth-child(1){width:500px;height:500px;background:rgba(226,39,24,0.05);top:-10%;left:-5%;animation-duration:25s}
+.orb-bg .o:nth-child(2){width:400px;height:400px;background:rgba(100,100,255,0.035);bottom:-10%;right:-5%;animation-duration:20s;animation-delay:-5s}
+.orb-bg .o:nth-child(3){width:300px;height:300px;background:rgba(226,39,24,0.025);top:40%;left:50%;animation-duration:18s;animation-delay:-10s}
+@keyframes oz{0%{transform:translate(0,0)scale(1)}50%{transform:translate(30px,-20px)scale(1.1)}100%{transform:translate(-20px,30px)scale(0.9)}}
 
-/* ── NAV GLASS ── */
-nav{
-  position:sticky;top:0;z-index:100;
-  height:var(--nav-h);display:flex;align-items:center;
-  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  background:rgba(8,8,8,0.7);
-  border-bottom:1px solid var(--border);
-}
-.nav-in{
-  display:flex;justify-content:space-between;align-items:center;
-  width:100%;max-width:var(--max-w);margin:0 auto;padding:0 24px;
-}
-.logo{
-  display:flex;align-items:center;gap:10px;
-  font-size:15px;font-weight:700;letter-spacing:1px;
-  text-transform:uppercase;
-}
-.logo .dot{
-  display:inline-block;width:8px;height:8px;
-  background:var(--accent);border-radius:50%;
-}
-.nav-links{display:flex;gap:32px;align-items:center}
-.nav-links a{
-  font-size:13px;font-weight:500;color:var(--text-secondary);
-  text-decoration:none;transition:.15s;letter-spacing:0.3px;
-}
-.nav-links a:hover{color:var(--text)}
-.nav-cta{
-  background:var(--accent);color:#fff;border:none;border-radius:var(--radius-md);
-  padding:10px 20px;font:600 13px/1 'Inter',sans-serif;
-  cursor:pointer;transition:.2s;
-}
-.nav-cta:hover{background:var(--accent-hover);transform:translateY(-1px);box-shadow:0 4px 20px rgba(226,39,24,0.25)}
+.z1{position:relative;z-index:1}
 
-/* Hamburger */
+/* ── NAV ── */
+nav{position:sticky;top:0;z-index:100;height:64px;display:flex;align-items:center;backdrop-filter:blur(16px);background:rgba(8,8,8,0.7);border-bottom:1px solid var(--border)}
+.nw{display:flex;justify-content:space-between;align-items:center;width:100%;max-width:var(--mx);margin:0 auto;padding:0 24px}
+.logo{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+.logo .d{display:inline-block;width:8px;height:8px;background:var(--accent);border-radius:50%}
+.nl{display:flex;gap:32px;align-items:center}
+.nl a{font-size:13px;font-weight:500;color:var(--ts);text-decoration:none;transition:.15s}
+.nl a:hover{color:var(--text)}
 .hamb{display:none;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;background:none;border:none;cursor:pointer}
 .hamb span{display:block;width:18px;height:2px;background:var(--text);border-radius:2px;transition:.2s}
 .hamb.active span:nth-child(1){transform:translateY(7px)rotate(45deg)}
 .hamb.active span:nth-child(2){opacity:0}
 .hamb.active span:nth-child(3){transform:translateY(-7px)rotate(-45deg)}
-.mobile-menu{display:none;position:fixed;top:var(--nav-h);left:0;width:100vw;height:calc(100vh - var(--nav-h));background:rgba(8,8,8,0.98);backdrop-filter:blur(24px);z-index:99;flex-direction:column;padding:32px 24px;gap:8px}
-.mobile-menu a{font-size:18px;font-weight:500;color:var(--text-secondary);text-decoration:none;padding:16px 0;border-bottom:1px solid var(--border);transition:.15s}
-.mobile-menu a:hover{color:var(--text)}
-.mobile-menu .nav-cta{margin-top:24px;width:100%;text-align:center;padding:14px}
+.mm{display:none;position:fixed;top:64px;left:0;width:100vw;height:calc(100vh - 64px);background:rgba(8,8,8,0.98);backdrop-filter:blur(24px);z-index:99;flex-direction:column;padding:32px 24px;gap:8px}
+.mm a{font-size:18px;font-weight:500;color:var(--ts);text-decoration:none;padding:16px 0;border-bottom:1px solid var(--border);transition:.15s}
+.mm a:hover{color:var(--text)}
+.mm .btn-solid{margin-top:24px;width:100%;justify-content:center;height:48px}
+
+/* BUTTON SYSTEM ── 3 variants */
+
+/* .btn-phantom — outline ghost with flicker glow */
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:8px;
+  background:transparent;color:var(--text);
+  border:1px solid rgba(255,255,255,0.15);
+  border-radius:var(--r8);height:44px;padding:0 24px;
+  font:500 13px/1 'Inter',sans-serif;letter-spacing:1px;
+  cursor:pointer;transition:all .3s cubic-bezier(.16,1,.3,1);
+  position:relative;overflow:hidden;
+}
+.btn-ghost::before{
+  content:'';position:absolute;inset:-1px;
+  border-radius:var(--r8);
+  background:linear-gradient(135deg,var(--accent),transparent 40%,transparent 60%,var(--accent));
+  opacity:0;transition:opacity .4s;z-index:-1;
+}
+.btn-ghost:hover{border-color:transparent;color:#fff;transform:translateY(-2px);box-shadow:0 8px 32px rgba(226,39,24,0.2)}
+.btn-ghost:hover::before{opacity:1}
+.btn-ghost .arr{display:inline-block;transition:transform .3s cubic-bezier(.16,1,.3,1)}
+.btn-ghost:hover .arr{transform:translateX(4px)}
+
+/* .btn-solid — solid accent with glow lift */
+.btn-solid{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--accent);color:#fff;
+  border:none;border-radius:var(--r8);height:44px;padding:0 24px;
+  font:600 13px/1 'Inter',sans-serif;letter-spacing:1px;
+  cursor:pointer;position:relative;overflow:hidden;
+  transition:all .3s cubic-bezier(.16,1,.3,1);
+}
+.btn-solid::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,0.08) 50%,transparent 60%);
+  background-size:200% 200%;
+  transition:background-position .5s;
+}
+.btn-solid:hover::after{background-position:100% 100%}
+.btn-solid:hover{background:var(--accent-h);transform:translateY(-2px);box-shadow:0 8px 32px rgba(226,39,24,0.35)}
+
+/* .btn-cta — big hero CTA with pulse ring */
+.btn-cta{
+  display:inline-flex;align-items:center;gap:12px;
+  background:var(--accent);color:#fff;
+  border:none;border-radius:var(--r12);height:56px;padding:0 36px;
+  font:600 15px/1 'Inter',sans-serif;letter-spacing:1.5px;
+  cursor:pointer;position:relative;overflow:visible;
+  transition:all .3s cubic-bezier(.16,1,.3,1);
+}
+.btn-cta .ring{
+  position:absolute;inset:-4px;border-radius:var(--r16);
+  border:1px solid rgba(226,39,24,0.3);
+  animation:pulse-ring 2.5s ease-in-out infinite;
+}
+@keyframes pulse-ring{
+  0%{transform:scale(1);opacity:1}
+  50%{transform:scale(1.06);opacity:0.4}
+  100%{transform:scale(1);opacity:1}
+}
+.btn-cta:hover{background:var(--accent-h);transform:translateY(-3px);box-shadow:0 12px 40px rgba(226,39,24,0.4)}
+.btn-cta:hover .ring{animation:none;opacity:0}
+.btn-cta .arrow{display:inline-block;transition:transform .4s cubic-bezier(.16,1,.3,1)}
+.btn-cta:hover .arrow{transform:translateX(6px)}
 
 /* ── HERO ── */
-.hero{
-  position:relative;z-index:1;
-  padding:120px 24px 80px;max-width:var(--max-w);margin:0 auto;
-}
-.hero-tag{
-  display:inline-flex;align-items:center;gap:8px;
-  background:var(--accent-subtle);border:1px solid rgba(226,39,24,0.2);
-  border-radius:100px;padding:6px 16px;margin-bottom:24px;
-  font-size:12px;font-weight:500;color:var(--accent);
-}
-.hero-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent)}
-.hero h1{
-  font-size:clamp(40px,6vw,72px);font-weight:800;
-  line-height:1.05;letter-spacing:-2px;max-width:800px;
-}
-.hero h1 .hl{color:var(--text-muted);font-weight:400}
-.hero h1 .g{background:linear-gradient(135deg,var(--accent),#ff6a00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero p{font-size:17px;font-weight:400;color:var(--text-secondary);max-width:500px;margin-top:20px;line-height:1.7}
-.hero-actions{display:flex;gap:12px;margin-top:36px;flex-wrap:wrap}
-.hero-actions .btn-p{height:48px;padding:0 28px;border-radius:var(--radius-md);font:600 14px/1 'Inter',sans-serif;cursor:pointer;transition:.2s;display:inline-flex;align-items:center;gap:8px}
-.hero-actions .btn-p.primary{background:var(--accent);color:#fff;border:none}
-.hero-actions .btn-p.primary:hover{background:var(--accent-hover);transform:translateY(-2px);box-shadow:0 8px 30px rgba(226,39,24,0.3)}
-.hero-actions .btn-p.outline{background:transparent;color:var(--text);border:1px solid var(--border-light)}
-.hero-actions .btn-p.outline:hover{border-color:var(--text);background:rgba(255,255,255,0.04)}
-.hero-tags{display:flex;gap:12px;margin-top:48px;flex-wrap:wrap}
-.hero-tags span{
-  font-size:12px;font-weight:500;color:var(--text-muted);
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:100px;padding:6px 14px;
-}
+.hr{padding:120px 24px 80px;max-width:var(--mx);margin:0 auto}
+.hr-tg{display:inline-flex;align-items:center;gap:8px;background:var(--accent-s);border:1px solid rgba(226,39,24,0.2);border-radius:100px;padding:6px 16px;margin-bottom:24px;font-size:12px;font-weight:500;color:var(--accent)}
+.hr-tg::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);animation:blip 2s ease-in-out infinite}
+@keyframes blip{0%,100%{opacity:1}50%{opacity:0.3}}
+.hr h1{font-size:clamp(40px,6vw,72px);font-weight:800;line-height:1.05;letter-spacing:-2px;max-width:800px}
+.hr h1 .hl{color:var(--tm);font-weight:400}
+.hr h1 .g{background:linear-gradient(135deg,var(--accent),#ff6a00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hr p{font-size:17px;color:var(--ts);max-width:500px;margin-top:20px;line-height:1.7}
+.ha{display:flex;gap:12px;margin-top:36px;flex-wrap:wrap}
+.ht{display:flex;gap:12px;margin-top:48px;flex-wrap:wrap}
+.ht span{font-size:12px;font-weight:500;color:var(--tm);background:var(--surface);border:1px solid var(--border);border-radius:100px;padding:6px 14px}
 
 /* ── SECTION HEADER ── */
-.s-h{font-size:clamp(24px,3vw,40px);font-weight:700;letter-spacing:-1px;margin-bottom:12px}
-.s-p{font-size:15px;color:var(--text-secondary);max-width:480px;margin-bottom:48px;line-height:1.6}
+.sh{font-size:clamp(24px,3vw,40px);font-weight:700;letter-spacing:-1px;margin-bottom:12px}
+.sp{font-size:15px;color:var(--ts);max-width:480px;margin-bottom:48px;line-height:1.6}
 
-/* ── SERVICES CARDS ── */
-.sv{padding:96px 24px;max-width:var(--max-w);margin:0 auto}
-.sv-gr{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.sv-cd{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--radius-lg);padding:28px;transition:.25s;position:relative;overflow:hidden;
-}
-.sv-cd::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0;transition:.3s}
-.sv-cd:hover{background:var(--surface-elevated);border-color:var(--border-light);transform:translateY(-4px)}
-.sv-cd:hover::before{opacity:1}
-.sv-cd .icon{font-size:24px;margin-bottom:16px;color:var(--accent)}
-.sv-cd h3{font-size:18px;font-weight:600;margin-bottom:10px}
-.sv-cd p{font-size:14px;color:var(--text-secondary);line-height:1.6;margin-bottom:20px}
-.sv-cd .pr{display:flex;align-items:baseline;gap:8px;padding-top:16px;border-top:1px solid var(--border)}
-.sv-cd .pr .t{font-size:12px;font-weight:500;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px}
-.sv-cd .pr .a{font-size:24px;font-weight:700}
-.sv-cd:hover .pr .a{color:var(--accent)}
-
-/* ── WHY ── */
-.wy{padding:96px 24px;max-width:var(--max-w);margin:0 auto}
-.wy-gr{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.wy-it{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--radius-lg);padding:32px 28px;transition:.25s;text-align:center;
-}
-.wy-it:hover{background:var(--surface-elevated);border-color:var(--border-light);transform:translateY(-4px)}
-.wy-it .num{
-  display:inline-flex;align-items:center;justify-content:center;
-  width:40px;height:40px;border-radius:var(--radius-sm);
-  background:var(--accent-subtle);color:var(--accent);
-  font-size:14px;font-weight:700;margin-bottom:16px;
-}
-.wy-it h4{font-size:17px;font-weight:600;margin-bottom:8px}
-.wy-it p{font-size:14px;color:var(--text-secondary);line-height:1.6}
+/* ── SERVICES ── */
+.sv{padding:96px 24px;max-width:var(--mx);margin:0 auto}
+.sg{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.sc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r12);padding:28px;transition:all .4s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden}
+.sc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0;transition:opacity .4s}
+.sc:hover{background:var(--elevated);border-color:var(--border-l);transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,0.3)}
+.sc:hover::before{opacity:1}
+.sc .ic{font-size:22px;margin-bottom:16px;color:var(--accent);font-weight:300}
+.sc h3{font-size:18px;font-weight:600;margin-bottom:10px}
+.sc p{font-size:14px;color:var(--ts);line-height:1.6;margin-bottom:20px}
+.sc .pr{display:flex;align-items:baseline;gap:8px;padding-top:16px;border-top:1px solid var(--border)}
+.sc .pr .t{font-size:11px;font-weight:500;color:var(--tm);text-transform:uppercase;letter-spacing:1.5px}
+.sc .pr .a{font-size:24px;font-weight:700;transition:color .3s}
+.sc:hover .pr .a{color:var(--accent)}
 
 /* ── BAND ── */
 .bd{width:100%;padding:80px 0;background:var(--surface);position:relative;overflow:hidden}
-.bd::before{content:'';position:absolute;top:-50%;left:-20%;width:140%;height:200%;background:radial-gradient(ellipse 40% 30% at 50% 50%,rgba(226,39,24,0.03),transparent);pointer-events:none}
-.bd-in{max-width:var(--max-w);margin:0 auto;padding:0 24px;position:relative;z-index:1}
+.bd::before{content:'';position:absolute;top:-50%;left:-20%;width:140%;height:200%;background:radial-gradient(ellipse 40% 30% at 50% 50%,rgba(226,39,24,0.035),transparent);pointer-events:none}
+.bi{max-width:var(--mx);margin:0 auto;padding:0 24px;position:relative;z-index:1}
 .bd h2{font-size:clamp(22px,3vw,36px);font-weight:700;letter-spacing:-1px;max-width:600px;margin-bottom:12px}
-.bd p{font-size:15px;color:var(--text-secondary);max-width:480px;line-height:1.6}
-.bd .tl{display:inline-flex;align-items:center;gap:8px;margin-top:24px;font-size:14px;font-weight:500;color:var(--accent);text-decoration:none;transition:.15s}
-.bd .tl:hover{color:var(--accent-hover);gap:12px}
-.bd .tl::after{content:'→'}
+.bd p{font-size:15px;color:var(--ts);max-width:480px;line-height:1.6}
+
+/* ── WHY ── */
+.wy{padding:96px 24px;max-width:var(--mx);margin:0 auto}
+.wg{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.wi{background:var(--surface);border:1px solid var(--border);border-radius:var(--r12);padding:32px 28px;text-align:center;transition:all .4s cubic-bezier(.16,1,.3,1);position:relative}
+.wi:hover{background:var(--elevated);border-color:var(--border-l);transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,0.3)}
+.wi .nu{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:var(--r6);background:var(--accent-s);color:var(--accent);font-size:14px;font-weight:700;margin-bottom:16px}
+.wi h4{font-size:17px;font-weight:600;margin-bottom:8px}
+.wi p{font-size:14px;color:var(--ts);line-height:1.6}
 
 /* ── FORM ── */
-.fm{padding:96px 24px;max-width:var(--max-w);margin:0 auto}
-.fm-gr{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.fm-gr .fw{grid-column:1/-1}
-.fm-lbl{display:block;font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
-.fm-in,.fm-ta{width:100%;background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:var(--radius-md);outline:none;transition:.2s;font:400 15px/1.5 'Inter',sans-serif}
-.fm-in{height:48px;padding:0 16px}
-.fm-ta{height:110px;padding:12px 16px;resize:vertical}
-.fm-in:focus,.fm-ta:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-subtle)}
-.fm-in::placeholder,.fm-ta::placeholder{color:var(--text-muted)}
-.fm .btn-p{height:48px;padding:0 28px;border-radius:var(--radius-md);background:var(--accent);color:#fff;border:none;font:600 14px/1 'Inter',sans-serif;cursor:pointer;transition:.2s}
-.fm .btn-p:hover{background:var(--accent-hover);transform:translateY(-2px);box-shadow:0 8px 30px rgba(226,39,24,0.3)}
+.fm{padding:96px 24px;max-width:var(--mx);margin:0 auto}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.fg .fw{grid-column:1/-1}
+.fl{display:block;font-size:11px;font-weight:600;color:var(--tm);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px}
+.fi,.fta{width:100%;background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:var(--r8);outline:none;transition:all .3s;font:400 15px/1.5 'Inter',sans-serif}
+.fi{height:48px;padding:0 16px}
+.fta{height:110px;padding:12px 16px;resize:vertical}
+.fi:focus,.fta:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-s)}
+.fi::placeholder,.fta::placeholder{color:var(--tm)}
 
-/* ── CTA ── */
-.ct{padding:96px 24px 120px;max-width:var(--max-w);margin:0 auto;text-align:center}
+/* ── CTA SECTION ── */
+.ct{padding:96px 24px 120px;max-width:var(--mx);margin:0 auto;text-align:center}
 .ct h2{font-size:clamp(28px,4vw,48px);font-weight:700;letter-spacing:-1px;margin-bottom:12px}
-.ct h2 .hl{color:var(--text-muted);font-weight:400}
-.ct p{font-size:15px;color:var(--text-secondary);margin-bottom:36px}
-.ct-btn{display:inline-flex;align-items:center;gap:10px;height:56px;padding:0 36px;border-radius:var(--radius-md);background:var(--accent);color:#fff;border:none;font:600 15px/1 'Inter',sans-serif;cursor:pointer;transition:.25s;text-decoration:none}
-.ct-btn:hover{background:var(--accent-hover);transform:translateY(-2px);box-shadow:0 12px 40px rgba(226,39,24,0.35)}
+.ct h2 .hl{color:var(--tm);font-weight:400}
+.ct p{font-size:15px;color:var(--ts);margin-bottom:36px}
 
 /* ── FOOTER ── */
-.ft{border-top:1px solid var(--border);padding:64px 24px 32px;max-width:var(--max-w);margin:0 auto}
-.ft-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px}
-.ft-brand p{font-size:13px;color:var(--text-muted);margin-top:12px;max-width:280px;line-height:1.6}
-.ft-col h5{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--text);margin-bottom:16px}
-.ft-col a{display:block;font-size:13px;color:var(--text-secondary);text-decoration:none;padding:4px 0;transition:.15s}
-.ft-col a:hover{color:var(--text)}
-.ft-bot{border-top:1px solid var(--border);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
-.ft-bot p{font-size:12px;color:var(--text-muted)}
-.ft-social{display:flex;gap:16px}
-.ft-social a{width:32px;height:32px;border-radius:var(--radius-sm);background:var(--surface);display:flex;align-items:center;justify-content:center;color:var(--text-muted);text-decoration:none;font-size:14px;transition:.15s}
-.ft-social a:hover{background:var(--accent);color:#fff}
+.ft{border-top:1px solid var(--border);padding:64px 24px 32px;max-width:var(--mx);margin:0 auto}
+.ft-t{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px}
+.ft-b p{font-size:13px;color:var(--tm);margin-top:12px;max-width:280px;line-height:1.6}
+.ft-c h5{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--text);margin-bottom:16px}
+.ft-c a{display:block;font-size:13px;color:var(--ts);text-decoration:none;padding:4px 0;transition:.15s}
+.ft-c a:hover{color:var(--text)}
+.ft-br{border-top:1px solid var(--border);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.ft-br p{font-size:12px;color:var(--tm)}
+.ft-s{display:flex;gap:16px}
+.ft-s a{width:32px;height:32px;border-radius:var(--r6);background:var(--surface);display:flex;align-items:center;justify-content:center;color:var(--tm);text-decoration:none;font-size:13px;font-weight:600;transition:.15s}
+.ft-s a:hover{background:var(--accent);color:#fff}
 
 /* ── RESPONSIVE ── */
 @media(max-width:767px){
-  .nav-links{display:none}
-  .nav-cta.desktop{display:none}
-  .hamb{display:flex}
-  .hero{padding:80px 16px 60px}
-  .hero h1{font-size:32px}
-  .hero p{font-size:15px}
-  .sv,.wy,.fm{padding:64px 16px}
-  .sv-gr{grid-template-columns:1fr}
-  .wy-gr{grid-template-columns:1fr}
-  .fm-gr{grid-template-columns:1fr}
+  .nl,.btn-solid.desk{display:none}
+  .hr{padding:80px 16px 60px}.hr h1{font-size:32px}.hr p{font-size:15px}
+  .sv,.wy,.fm{padding:64px 16px}.sg,.wg{grid-template-columns:1fr}
+  .fg{grid-template-columns:1fr}
   .bd{padding:48px 0}
-  .ft{padding:40px 16px 24px}
-  .ft-top{grid-template-columns:1fr 1fr;gap:24px}
-  .ft-brand{grid-column:1/-1}
   .ct{padding:64px 16px 80px}
-  .ct-btn{width:100%;justify-content:center}
-  .ft-bot{flex-direction:column;text-align:center}
+  .ft{padding:40px 16px 24px}.ft-t{grid-template-columns:1fr 1fr;gap:24px}
+  .ft-b{grid-column:1/-1}
+  .btn-cta{width:100%;justify-content:center}
+  .ha .btn-ghost{display:none}
+  .ft-br{flex-direction:column;text-align:center}
 }
 @media(min-width:768px)and(max-width:1024px){
-  .sv-gr{grid-template-columns:repeat(2,1fr)}
-  .wy-gr{grid-template-columns:repeat(2,1fr)}
-  .ft-top{grid-template-columns:1fr 1fr 1fr}
-  .ft-brand{grid-column:1/-1}
-}
-@media(min-width:1025px){
-  .mobile-menu{display:none!important}
+  .sg,.wg{grid-template-columns:repeat(2,1fr)}
+  .ft-t{grid-template-columns:1fr 1fr 1fr}.ft-b{grid-column:1/-1}
 }
 </style>
 </head>
 <body>
 
-<div class="hero-bg">
-  <div class="orb"></div>
-  <div class="orb"></div>
-  <div class="orb"></div>
-</div>
+<div class="orb-bg"><div class="o"></div><div class="o"></div><div class="o"></div></div>
 
-<!-- NAV -->
+<div class="z1">
 <nav>
-  <div class="nav-in">
-    <div class="logo"><span class="dot"></span> PHANTOM</div>
-    <div class="nav-links">
-      <a href="#" onclick="event.preventDefault();document.getElementById('sv-sec').scrollIntoView({behavior:'smooth'})">Servicios</a>
-      <a href="#" onclick="event.preventDefault();document.getElementById('wy-sec').scrollIntoView({behavior:'smooth'})">Nosotros</a>
-      <a href="#" onclick="event.preventDefault();document.getElementById('fm-sec').scrollIntoView({behavior:'smooth'})">Contacto</a>
+  <div class="nw">
+    <div class="logo"><span class="d"></span> PHANTOM</div>
+    <div class="nl">
+      <a href="#" onclick="event.preventDefault();navTo('sv-sec')">Servicios</a>
+      <a href="#" onclick="event.preventDefault();navTo('wy-sec')">Nosotros</a>
+      <a href="#" onclick="event.preventDefault();navTo('fm-sec')">Contacto</a>
+      <button class="btn-solid desk" onclick="navTo('cta-main')">Agendar <span class="arr">&rarr;</span></button>
     </div>
-    <button class="nav-cta desktop" onclick="document.getElementById('cta-main').scrollIntoView({behavior:'smooth'})">Agendar llamada</button>
-    <button class="hamb" id="hambBtn" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#" onclick="closeMob();document.getElementById('sv-sec').scrollIntoView({behavior:'smooth'})">Servicios</a>
-  <a href="#" onclick="closeMob();document.getElementById('wy-sec').scrollIntoView({behavior:'smooth'})">Nosotros</a>
-  <a href="#" onclick="closeMob();document.getElementById('fm-sec').scrollIntoView({behavior:'smooth'})">Contacto</a>
-  <button class="nav-cta" onclick="closeMob();document.getElementById('cta-main').scrollIntoView({behavior:'smooth'})">Agendar llamada</button>
-</div>
-
-<!-- HERO -->
-<section class="hero" id="hero-e">
-  <div class="hero-tag rv" id="tagTop">Marketing digital de alto impacto</div>
+<section class="hr">
+  <div class="hr-tg" id="e1">Marketing digital de alto impacto</div>
   <h1>
-    <span class="hl" id="h1a">NEGOCIOS</span><br>
-    <span id="h1b">FANTASMA</span><br>
-    <span class="hl" id="h1c">NO TIENEN</span><br>
-    <span class="g" id="h1d">FUTURO</span>
+    <span class="hl" id="e2">NEGOCIOS</span><br>
+    <span id="e3">FANTASMA</span><br>
+    <span class="hl" id="e4">NO TIENEN</span><br>
+    <span class="g" id="e5">FUTURO</span>
   </h1>
-  <p id="hero-p">Tener el mejor servicio del mundo no sirve de nada si nadie te encuentra. Creamos presencia digital que convierte.</p>
-  <div class="hero-actions" id="acts">
-    <button class="btn-p primary" onclick="document.getElementById('cta-main').scrollIntoView({behavior:'smooth'})">Agendar llamada</button>
-    <button class="btn-p outline" onclick="document.getElementById('sv-sec').scrollIntoView({behavior:'smooth'})">Ver servicios</button>
+  <p id="e6">Tener el mejor servicio no sirve si nadie te encuentra. Creamos presencia digital que convierte visitantes en clientes.</p>
+  <div class="ha" id="e7">
+    <button class="btn-cta" onclick="navTo('cta-main')"><span class="ring"></span>Agendar llamada <span class="arrow">&rarr;</span></button>
+    <button class="btn-ghost" onclick="navTo('sv-sec')">Ver servicios <span class="arr">&rarr;</span></button>
   </div>
-  <div class="hero-tags" id="tags">
-    <span>Diseno Web</span>
-    <span>Chatbot IA</span>
-    <span>Tienda Online</span>
-    <span>SEO</span>
+  <div class="ht" id="e8">
+    <span>Diseno Web</span><span>Chatbot IA</span><span>Tienda Online</span><span>SEO</span>
   </div>
 </section>
 
-<!-- SERVICES -->
 <section class="sv" id="sv-sec">
-  <h2 class="s-h rv">Servicios</h2>
-  <p class="s-p rv">Todo lo que necesitas para que tu negocio exista en digital y empiece a recibir clientes nuevos.</p>
-  <div class="sv-gr">
-    <div class="sv-cd rv">
-      <div class="icon">&#9670;</div>
-      <h3>Diseno Web</h3>
+  <div class="sh" id="s1">Servicios</div>
+  <div class="sp" id="s2">Todo lo que necesitas para aparecer en digital y empezar a recibir clientes nuevos.</div>
+  <div class="sg">
+    <div class="sc" data-idx="0">
+      <div class="ic">&#9670;</div><h3>Diseno Web</h3>
       <p>Paginas rapidas y optimizadas para conversion. Conectamos WhatsApp, Google Maps y galeria. Tu negocio abierto 24/7.</p>
       <div class="pr"><span class="t">Desde</span><span class="a">$49 USD</span></div>
     </div>
-    <div class="sv-cd rv">
-      <div class="icon">&#9670;</div>
-      <h3>Chatbot IA</h3>
-      <p>Automatiza tu WhatsApp. Responde preguntas, agenda citas y capta leads mientras duermes. Como una recepcionista que nunca para.</p>
+    <div class="sc" data-idx="1">
+      <div class="ic">&#9670;</div><h3>Chatbot IA</h3>
+      <p>Automatiza tu WhatsApp. Responde preguntas, agenda citas y capta leads. Como una recepcionista que nunca para.</p>
       <div class="pr"><span class="t">Desde</span><span class="a">$49 /mes</span></div>
     </div>
-    <div class="sv-cd rv">
-      <div class="icon">&#9670;</div>
-      <h3>Tienda Online</h3>
-      <p>Tu tienda lista para vender. Catalogo, carrito, pagos integrados. Tu te encargas del producto, nosotros de la tecnologia.</p>
+    <div class="sc" data-idx="2">
+      <div class="ic">&#9670;</div><h3>Tienda Online</h3>
+      <p>Tu tienda lista para vender. Catalogo, carrito, pagos integrados. Tu pones el producto, nosotros la tecnologia.</p>
       <div class="pr"><span class="t">Desde</span><span class="a">$99 USD</span></div>
     </div>
   </div>
 </section>
 
-<!-- BAND -->
-<section class="bd">
-  <div class="bd-in">
-    <h2 class="rv">Tres razones para dejar de ser fantasma</h2>
-    <p class="rv">No medimos exito en likes. Medimos en clientes nuevos que llegan a traves de Google.</p>
-    <a href="#" class="tl rv" onclick="event.preventDefault();document.getElementById('wy-sec').scrollIntoView({behavior:'smooth'})">Ver mas</a>
+<section class="bd" id="band-sec">
+  <div class="bi">
+    <h2 id="b1">Tres razones para dejar de ser fantasma</h2>
+    <p id="b2">No medimos exito en likes. Medimos en clientes nuevos que llegan a traves de Google.</p>
   </div>
 </section>
 
-<!-- WHY -->
 <section class="wy" id="wy-sec">
-  <h2 class="s-h rv">Por que Phantom</h2>
-  <p class="s-p rv">Construimos presencia digital que realmente funciona para tu negocio.</p>
-  <div class="wy-gr">
-    <div class="wy-it rv">
-      <div class="num">01</div>
-      <h4>Velocidad</h4>
-      <p>Tu sitio en 72 horas. Sin reuniones eternas ni consultorias. Hablamos y ejecutamos.</p>
+  <div class="sh" id="w1">Por que Phantom</div>
+  <div class="sp" id="w2">Trabajamos con un objetivo claro: que tu negocio aparezca y vendas mas.</div>
+  <div class="wg">
+    <div class="wi" data-idx="0">
+      <div class="nu">01</div><h4>Velocidad</h4>
+      <p>Tu sitio en 72 horas. Sin reuniones eternas. Hablamos y ejecutamos.</p>
     </div>
-    <div class="wy-it rv">
-      <div class="num">02</div>
-      <h4>Resultados</h4>
-      <p>Cada proyecto apunta a una metrica: que mas clientes lleguen a tu negocio. Nada de metricas vanity.</p>
+    <div class="wi" data-idx="1">
+      <div class="nu">02</div><h4>Resultados</h4>
+      <p>Cada proyecto apunta a una sola metrica: clientes nuevos. Nada de metricas vanity.</p>
     </div>
-    <div class="wy-it rv">
-      <div class="num">03</div>
-      <h4>Soporte real</h4>
-      <p>WhatsApp directo con quien construyo tu sitio. Sin tickets, sin chatbots, sin esperas.</p>
+    <div class="wi" data-idx="2">
+      <div class="nu">03</div><h4>Soporte real</h4>
+      <p>WhatsApp directo. Sin tickets ni chatbots. Respondemos nosotros en persona.</p>
     </div>
   </div>
 </section>
 
-<!-- FORM -->
 <section class="fm" id="fm-sec">
-  <h2 class="s-h rv">Contacto</h2>
-  <p class="s-p rv">Cuentanos de tu proyecto y te respondemos en menos de 24 horas.</p>
-  <div class="fm-gr">
-    <div class="rv"><label class="fm-lbl">Nombre</label><input class="fm-in" type="text" placeholder="Tu nombre" /></div>
-    <div class="rv"><label class="fm-lbl">Email</label><input class="fm-in" type="email" placeholder="tu@email.com" /></div>
-    <div class="fw rv"><label class="fm-lbl">Mensaje</label><textarea class="fm-ta" placeholder="Cuentanos de tu proyecto..."></textarea></div>
-    <div class="fw rv"><button class="btn-p">Enviar mensaje</button></div>
+  <div class="sh" id="f1">Contacto</div>
+  <div class="sp" id="f2">Cuentanos de tu proyecto. Te respondemos en menos de 24 horas.</div>
+  <div class="fg">
+    <div><label class="fl">Nombre</label><input class="fi" id="fi1" type="text" placeholder="Tu nombre" /></div>
+    <div><label class="fl">Email</label><input class="fi" id="fi2" type="email" placeholder="tu@email.com" /></div>
+    <div class="fw"><label class="fl">Mensaje</label><textarea class="fta" id="fi3" placeholder="Cuentanos de tu proyecto..."></textarea></div>
+    <div class="fw"><button class="btn-solid" id="fi4">Enviar mensaje <span class="arr">&rarr;</span></button></div>
   </div>
 </section>
 
-<!-- CTA -->
 <section class="ct" id="cta-main">
-  <h2>Tu negocio merece <span class="hl">ser visto</span></h2>
-  <p>Sin compromiso. Te mostramos como aparecer en Google y recibir clientes.</p>
-  <button class="ct-btn">Agendar llamada &rarr;</button>
+  <h2 id="c1">Tu negocio merece <span class="hl">ser visto</span></h2>
+  <p id="c2">Sin compromiso. Te mostramos como aparecer en Google y empezar a recibir clientes.</p>
+  <button class="btn-cta" id="c3"><span class="ring"></span>Agendar llamada <span class="arrow">&rarr;</span></button>
 </section>
 
-<!-- FOOTER -->
 <footer class="ft">
-  <div class="ft-top">
-    <div class="ft-brand">
-      <div class="logo" style="margin-bottom:12px"><span class="dot"></span> PHANTOM</div>
-      <p>Presencia digital de alto impacto para negocios que quieren ser encontrados en Google.</p>
-    </div>
-    <div class="ft-col">
-      <h5>Servicios</h5>
-      <a href="#">Diseno Web</a>
-      <a href="#">Chatbot IA</a>
-      <a href="#">Tienda Online</a>
-      <a href="#">SEO</a>
-    </div>
-    <div class="ft-col">
-      <h5>Phantom</h5>
-      <a href="#">Sobre nosotros</a>
-      <a href="#">Trabajos</a>
-      <a href="#">Testimonios</a>
-    </div>
-    <div class="ft-col">
-      <h5>Contacto</h5>
-      <a href="#">WhatsApp</a>
-      <a href="#">Email</a>
-      <a href="#">Instagram</a>
-    </div>
+  <div class="ft-t">
+    <div class="ft-b"><div class="logo" style="margin-bottom:12px"><span class="d"></span> PHANTOM</div><p>Presencia digital para negocios que quieren ser encontrados en Google.</p></div>
+    <div class="ft-c"><h5>Servicios</h5><a href="#">Diseno Web</a><a href="#">Chatbot IA</a><a href="#">Tienda Online</a><a href="#">SEO</a></div>
+    <div class="ft-c"><h5>Phantom</h5><a href="#">Sobre nosotros</a><a href="#">Trabajos</a><a href="#">Testimonios</a></div>
+    <div class="ft-c"><h5>Contacto</h5><a href="#">WhatsApp</a><a href="#">Email</a><a href="#">Instagram</a></div>
   </div>
-  <div class="ft-bot">
-    <p>&copy; 2026 Phantom. Todos los derechos reservados.</p>
-    <div class="ft-social">
-      <a href="#" aria-label="Instagram">IG</a>
-      <a href="#" aria-label="WhatsApp">WA</a>
-      <a href="#" aria-label="LinkedIn">LI</a>
-    </div>
-  </div>
+  <div class="ft-br"><p>&copy; 2026 Phantom.</p><div class="ft-s"><a href="#">IG</a><a href="#">WA</a><a href="#">LI</a></div></div>
 </footer>
+</div>
 
 <script>
-// ── MOBILE MENU ──
+function navTo(id){document.getElementById(id).scrollIntoView({behavior:'smooth'})}
 const hamb=document.getElementById('hambBtn');
-const mobMenu=document.getElementById('mobileMenu');
-function toggleMob(){mobMenu.style.display=mobMenu.style.display==='flex'?'none':'flex'}
-function closeMob(){mobMenu.style.display='none'}
-hamb.addEventListener('click',toggleMob);
+const mobMenu=document.getElementById('mobMenu');
+function toggleMob(){mobMenu.classList.toggle('show')}
+function closeMob(){mobMenu.classList.remove('show')}
+if(hamb)hamb.addEventListener('click',toggleMob);
 
-// ── ANIME ──
+// ── HERO ENTRANCE ──
 document.addEventListener('DOMContentLoaded',()=>{
   setTimeout(()=>{
-    if(typeof anime==='undefined'){document.querySelectorAll('.rv').forEach(e=>e.style.opacity=1);return}
-    const tl=anime.timeline({easing:'easeOutExpo'});
-    tl.add({targets:'#tagTop',opacity:[0,1],translateY:[8,0],duration:500})
-      .add({targets:'#h1a',opacity:[0,1],translateX:[-20,0],duration:600},'-=200')
-      .add({targets:'#h1b',opacity:[0,1],scale:[.9,1],duration:600},'-=300')
-      .add({targets:'#h1c',opacity:[0,1],translateX:[20,0],duration:600},'-=300')
-      .add({targets:'#h1d',opacity:[0,1],translateY:[10,0],duration:700},'-=400')
-      .add({targets:'#hero-p',opacity:[0,1],translateY:[10,0],duration:500},'-=300')
-      .add({targets:'#acts .btn-p',opacity:[0,1],translateY:[8,0],delay:anime.stagger(80),duration:500},'-=200')
-      .add({targets:'#tags span',opacity:[0,1],translateY:[6,0],delay:anime.stagger(40),duration:400},'-=100');
-    const ob=new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting){anime({targets:en.target,opacity:[0,1],translateY:[20,0],duration:500,delay:anime.stagger(80,{from:'first'}),easing:'easeOutExpo'});ob.unobserve(en.target)}})},{threshold:.1});
-    document.querySelectorAll('.rv').forEach(el=>{el.style.opacity=0;ob.observe(el)});
-  },200);
+    if(typeof anime==='undefined')return;
+    const t=anime.timeline({easing:'easeOutExpo'});
+    t.add({targets:'#e1',opacity:[0,1],translateY:[8,0],duration:500})
+     .add({targets:'#e2',opacity:[0,1],translateX:[-30,0],duration:600},'-=200')
+     .add({targets:'#e3',opacity:[0,1],scale:[.8,1],duration:600},'-=300')
+     .add({targets:'#e4',opacity:[0,1],translateX:[30,0],duration:600},'-=300')
+     .add({targets:'#e5',opacity:[0,1],translateY:[12,0],duration:700},'-=400')
+     .add({targets:'#e6',opacity:[0,1],translateY:[10,0],duration:500},'-=300')
+     .add({targets:'#e7',opacity:[0,1],translateY:[8,0],duration:500},'-=200')
+     .add({targets:'#e8 span',opacity:[0,1],translateY:[6,0],duration:400,delay:anime.stagger(40)},'-=100');
+
+    // ── SECTION TRANSITIONS ──
+    const obs=new IntersectionObserver((entries)=>{
+      entries.forEach(en=>{
+        if(!en.isIntersecting)return;
+        const el=en.target;
+        const id=el.id || el.dataset.section;
+
+        // Services section: heading from left, cards staggered from bottom with rotation
+        if(el.id==='sv-sec'){
+          anime({targets:'#s1,#s2',opacity:[0,1],translateX:[-40,0],duration:500,easing:'easeOutExpo'});
+          document.querySelectorAll('.sc').forEach(c=>{
+            c.style.opacity=0;c.style.transform='translateY(40px) rotateX(5deg)';
+          });
+          anime({targets:'.sc',opacity:[0,1],translateY:[40,0],rotateX:[5,0],duration:600,delay:anime.stagger(120),easing:'easeOutExpo'});
+          obs.unobserve(el);
+        }
+
+        // Band section: clip-path-like reveal
+        if(el.id==='band-sec'){
+          anime({targets:'#b1',opacity:[0,1],translateY:[30,0],duration:600,easing:'easeOutExpo'});
+          anime({targets:'#b2',opacity:[0,1],translateY:[20,0],duration:500,delay:200,easing:'easeOutExpo'});
+          obs.unobserve(el);
+        }
+
+        // Why section: scale from 0.8 with stagger
+        if(el.id==='wy-sec'){
+          anime({targets:'#w1,#w2',opacity:[0,1],translateY:[-20,0],duration:500,easing:'easeOutExpo'});
+          document.querySelectorAll('.wi').forEach(c=>{c.style.opacity=0;c.style.transform='scale(0.85) translateY(20px)'});
+          anime({targets:'.wi',opacity:[0,1],scale:[0.85,1],translateY:[20,0],duration:500,delay:anime.stagger(100),easing:'easeOutExpo'});
+          obs.unobserve(el);
+        }
+
+        // Form: inputs slide from different directions
+        if(el.id==='fm-sec'){
+          anime({targets:'#f1,#f2',opacity:[0,1],translateY:[-20,0],duration:500,easing:'easeOutExpo'});
+          anime({targets:'#fi1',opacity:[0,1],translateX:[-30,0],duration:500,easing:'easeOutExpo'});
+          anime({targets:'#fi2',opacity:[0,1],translateX:[30,0],duration:500,delay:100,easing:'easeOutExpo'});
+          anime({targets:'#fi3',opacity:[0,1],translateY:[20,0],duration:500,delay:200,easing:'easeOutExpo'});
+          anime({targets:'#fi4',opacity:[0,1],translateY:[20,0],duration:600,delay:350,easing:'easeOutExpo'});
+          obs.unobserve(el);
+        }
+
+        // CTA section: dramatic zoom
+        if(el.id==='cta-main'){
+          anime({targets:'#c1',opacity:[0,1],scale:[0.8,1],duration:700,easing:'easeOutExpo'});
+          anime({targets:'#c2',opacity:[0,1],translateY:[15,0],duration:500,delay:200,easing:'easeOutExpo'});
+          anime({targets:'#c3',opacity:[0,1],translateY:[15,0],duration:600,delay:400,easing:'easeOutExpo'});
+          obs.unobserve(el);
+        }
+      });
+    },{threshold:0.12});
+
+    document.querySelectorAll('#sv-sec,#band-sec,#wy-sec,#fm-sec,#cta-main').forEach(el=>obs.observe(el));
+  },300);
 });
-setTimeout(()=>{document.querySelectorAll('.rv').forEach(e=>{if(e.style.opacity==='0'||e.style.opacity===0)e.style.opacity=1})},3000);
+
+// ── MOUSE GLOW ON CARDS ──
+document.addEventListener('mousemove',(e)=>{
+  document.querySelectorAll('.sc,.wi').forEach(card=>{
+    const r=card.getBoundingClientRect();
+    const x=e.clientX-r.left,y=e.clientY-r.top;
+    card.style.setProperty('--mx',x+'px');
+    card.style.setProperty('--my',y+'px');
+  });
+});
 </script>
 </body>
 </html>
