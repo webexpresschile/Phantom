@@ -37,6 +37,10 @@ body{
 
 *{transition:all .35s cubic-bezier(.25,.1,.25,1)}
 
+/* ── ACCESSIBILITY ── */
+a:focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:2px}
+button:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+
 /* ── NAV: white/gray bg, uppercase, CTA black ── */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
@@ -171,30 +175,31 @@ nav{
 /* ── TEAM — Blue bg ── */
 .tg{display:grid;grid-template-columns:repeat(3,1fr);gap:48px;margin-top:64px}
 .tc{text-align:center}
-.tc .av{
-  width:80px;height:80px;margin:0 auto 20px;
+.tc .av-img{
+  width:120px;height:120px;margin:0 auto 24px;
   border-radius:50%;
   background:rgba(0,0,0,0.08);
   display:flex;align-items:center;justify-content:center;
-  font-size:24px;font-weight:600;color:var(--black);
+  font-size:34px;font-weight:600;color:var(--black);
   letter-spacing:2px;
+  border:2px solid rgba(0,0,0,0.06);
 }
-.tc h4{font-size:16px;font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;color:var(--white)}
-.tc p{font-size:12px;font-weight:300;color:rgba(255,255,255,0.4);letter-spacing:1.5px;text-transform:uppercase}
+.tc h4{font-size:24px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;color:var(--white)}
+.tc p{font-size:13px;font-weight:400;color:rgba(255,255,255,0.8);letter-spacing:1px;text-transform:uppercase}
 @media(max-width:767px){.tg{grid-template-columns:1fr;gap:32px}}
 
 /* ── CONTACT — Black ── */
 .cx{text-align:center;margin-top:48px}
 .cx .email-big{
   font-size:clamp(24px,4vw,48px);
-  font-weight:300;
+  font-weight:700;
   color:var(--white);
-  text-decoration:none;
-  border-bottom:1px solid rgba(255,255,255,0.1);
-  padding-bottom:4px;
+  text-decoration:underline;
+  text-underline-offset:6px;
+  text-decoration-thickness:2px;
   display:inline-block;margin-bottom:16px;
 }
-.cx .email-big:hover{border-color:var(--white)}
+.cx .email-big:hover{text-decoration-color:rgba(255,255,255,0.5)}
 .cx .hint{font-size:13px;font-weight:400;color:rgba(255,255,255,0.2);letter-spacing:1.5px;text-transform:uppercase}
 
 /* ── CTA BAND ── */
@@ -202,6 +207,7 @@ nav{
 .cta-band h2{font-size:clamp(28px,4vw,56px);font-weight:700;letter-spacing:-1px;text-transform:uppercase;color:var(--white);margin-bottom:32px}
 .cta-band a{display:inline-block;font-size:13px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;background:var(--white);color:var(--blue);padding:14px 48px;text-decoration:none}
 .cta-band a:hover{background:rgba(255,255,255,0.85)}
+.cta-band a:focus-visible{outline:2px solid var(--white);outline-offset:4px}
 
 /* ── FOOTER ── */
 .ft{padding:80px 24px 32px;border-top:1px solid rgba(255,255,255,0.06);max-width:var(--mx);margin:0 auto}
@@ -369,17 +375,17 @@ nav{
     <div class="sub ah" id="t2">Detrás de cada proyecto hay personas que saben de tecnología y diseño.</div>
     <div class="tg">
       <div class="tc ah" data-idx="0">
-        <div class="av">AM</div>
+        <div class="av-img">AM</div>
         <h4>Armando</h4>
         <p>Fundador · Desarrollo</p>
       </div>
       <div class="tc ah" data-idx="1">
-        <div class="av">DM</div>
+        <div class="av-img">DM</div>
         <h4>Dimo</h4>
         <p>Agente IA · Automatización</p>
       </div>
       <div class="tc ah" data-idx="2">
-        <div class="av">TU</div>
+        <div class="av-img">TU</div>
         <h4>Tú</h4>
         <p>Próximo cliente</p>
       </div>
@@ -390,7 +396,7 @@ nav{
 <!-- ─── CONTACT — Black ─── -->
 <section class="sec sec-black" id="contacto">
   <div class="si">
-    <h2 class="ah" id="c1">Contacto</h2>
+    <h2 class="ah" id="c1">Say Hello</h2>
     <div class="sub ah" id="c2">Cuéntanos de tu proyecto. Te respondemos en menos de 24 horas.</div>
     <div class="cx">
       <a href="mailto:hola@phantom.cl" class="email-big ah" id="c3">hola@phantom.cl</a>
