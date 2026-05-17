@@ -8,6 +8,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/4.0.0-beta.3/anime.min.js"></script>
+<script>/* Safety: reveal all content if anime doesn't load */
+window._animeFail=setTimeout(function(){document.querySelectorAll('.ah').forEach(function(e){e.style.opacity='1';e.style.transform='translateY(0)';e.style.transition='none'})},2000);
+</script>
 <style>
 /* ═══════════════════════════════════════════════
    NINE SIXTY REAL → PHANTOM AGENCY
@@ -165,7 +168,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 }
 
 /* ── SCROLL REVEAL ── */
-.ah{opacity:0;transform:translateY(20px)}
+/* Content always visible. Anime enhances with scroll reveals. */
+.ah{opacity:0;transform:translateY(24px);transition:none}
 </style>
 </head>
 <body>
@@ -468,6 +472,7 @@ if(hamb){
 document.addEventListener('DOMContentLoaded',()=>{
   setTimeout(()=>{
     if(typeof anime==='undefined')return;
+    clearTimeout(window._animeFail);
     const t=anime.timeline({easing:'easeOutCubic',duration:500});
     t.add({targets:'#e1',opacity:[0,1],translateY:[16,0],duration:450})
      .add({targets:'#e2',opacity:[0,1],translateX:[-30,0],duration:500},'-=250')
